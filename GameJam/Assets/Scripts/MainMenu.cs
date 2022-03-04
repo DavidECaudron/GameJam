@@ -4,6 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _optionMenu;
     [SerializeField] private GameObject _resumeBtn;
+    [SerializeField] private GameObject _chooseLvlMenu;
 
     private void Start()
     {
@@ -13,6 +14,22 @@ public class MainMenu : MonoBehaviour
         {
             _resumeBtn.SetActive(false);
         }
+    }
+
+    public void ResumeGame()
+    {
+        //TODO load level save.LevelReached
+        SaveData save = SaveManager.Instance.GetSaveData();
+    }
+
+    public void NewGame()
+    {
+        //TODO load level 1
+    }
+
+    public void ChooseLevel()
+    {
+        _chooseLvlMenu.SetActive(!_chooseLvlMenu.activeInHierarchy);
     }
 
     public void ToggleOptionMenu()
