@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour
         if (player != null)
         {
             player.Die();
-            _followTarget.StopFollow();
         }
     }
 }

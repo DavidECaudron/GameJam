@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidBody;
     private float _movementX;
     private float _movementY;
+
+    PlayerForm[] playeforms;
 
     private void Start()
     {
@@ -42,5 +45,28 @@ public class PlayerController : MonoBehaviour
         {
             _rigidBody.angularVelocity = Vector3.zero;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EatableObject")
+        {
+            EatableObject eatable = other.GetComponent<EatableObject>();
+            if (eatable == null) return;
+
+
+            if (eatable.ChangePlayerForm)
+            {
+                //changer forme du joueur
+
+                PlayerForm form = playeforms.FirstOrDefault(x => x.PlayerFormEnum == eatable.PlayerFormEnum);
+
+            }
+
+            Destroy(eatable.gameObject);
+            Debug.Log("Bitoniau");
+        }
+
+
     }
 }
