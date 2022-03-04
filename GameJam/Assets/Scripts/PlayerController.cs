@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
         _rigidBody.AddForce(movement * _speed);
+        Rotation();
     }
 
     private void OnMove(InputValue movementValue)
@@ -26,5 +27,20 @@ public class PlayerController : MonoBehaviour
 
         _movementX = movementVector.x;
         _movementY = movementVector.y;
+    }
+
+    private void Rotation()
+    {
+        Vector3 direction = _rigidBody.velocity;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude > 0.1f)
+        {
+            _rigidBody.rotation = Quaternion.LookRotation(direction, new Vector3(0, 1, 0));
+        }
+        else
+        {
+            _rigidBody.angularVelocity = Vector3.zero;
+        }
     }
 }
