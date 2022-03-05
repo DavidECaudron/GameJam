@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 1972529272}
   - component: {fileID: 1972529271}
   m_Layer: 0
-  m_Name: Sphere Player
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,6 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2271095911617614899}
   - component: {fileID: 1698507686287472303}
+  - component: {fileID: 1625975047}
   - component: {fileID: 348980913}
   - component: {fileID: 348980912}
   - component: {fileID: 123150550}
@@ -177,6 +178,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!135 &1625975047
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206616992658186270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &348980913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,8 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sphere: {fileID: 2212977577671818382, guid: 905b8b48e237f0e4380beac174b2103e, type: 3}
-  _sphereMesh: {fileID: 1972529269}
-  _sphereCollider: {fileID: 84139023}
+  _sphereMesh: {fileID: 1972529271}
+  _sphereCollider: {fileID: 84139025}
   _speed: 15
 --- !u!114 &123150550
 MonoBehaviour:
