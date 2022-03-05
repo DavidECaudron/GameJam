@@ -57,19 +57,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EatableObject")
-        {
-            EatableObject eatable = other.GetComponent<EatableObject>();
-            if (eatable == null) return;
-
-
-            if (eatable.ChangePlayerForm)
-            {
-                //changer forme du joueur
-            }
-
-            Destroy(eatable.gameObject);
-            Debug.Log("Bitoniau");
-        }
+        
     }
 }
