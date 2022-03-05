@@ -3,7 +3,7 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _optionMenu;
-    [SerializeField] private string _mainMenuSceneName;
+    [SerializeField] private int _mainMenuSceneIndex;
 
     public void ResumeGame()
     {
@@ -16,12 +16,23 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void BackToMainMenu()
-    {
-        GameManager.Instance.LoadScene(_mainMenuSceneName);
+    {        
+        GameManager.Instance.LoadScene(_mainMenuSceneIndex);
+        UIManager.Instance.TogglePauseMenu();
     }
 
     public bool GetOptionMenuWasVisible()
     {
         return _optionMenu.activeInHierarchy;
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.GamePaused = true;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.GamePaused = false;
     }
 }

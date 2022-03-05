@@ -7,9 +7,22 @@ public class GameManager : MonoBehaviour
     [Header("Loading screen", order = 0)]
     [SerializeField] [Range(.5f, 5f)]float _fadingTime = 2f;
     [SerializeField] CanvasGroup _canvasGroup;
+    [SerializeField] string _mainMenuSceneName;
 
     private Player _player;
     public static GameManager Instance;
+
+    public bool GamePaused
+    {
+        get
+        {
+            return Time.timeScale == 0f;
+        }
+        set
+        {
+            Time.timeScale = value ? 0f : 1f;
+        }
+    }
 
     private void Awake()
     {
@@ -22,6 +35,11 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         Instance = this;
+    }
+
+    public bool OnMainMenu()
+    {
+        return SceneManager.GetActiveScene().name == _mainMenuSceneName;
     }
 
     public Player GetPlayer()
@@ -37,16 +55,6 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int sceneIndex)
     {
         StartCoroutine(LoadSceneWithIndex(sceneIndex));
-    }
-
-    public void LoadScene(string sceneName)
-    {        
-        StartCoroutine(LoadSceneWithIndex(GetSceneIndex(sceneName)));
-    }
-
-    private int GetSceneIndex(string sceneName)
-    {
-        return SceneManager.GetSceneByName(sceneName).buildIndex;
     }
 
     private IEnumerator LoadSceneWithIndex(int sceneIndex)
@@ -78,6 +86,8 @@ public class GameManager : MonoBehaviour
 
         _canvasGroup.gameObject.SetActive(false);
         #endregion
+
+        GamePaused = false;
 
         yield return null;
     }

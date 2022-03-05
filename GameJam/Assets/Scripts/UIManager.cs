@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
 
     public void TogglePauseMenu()
     {
+        if (GameManager.Instance.OnMainMenu()) return;
+
+
         if (_pauseMenu.GetOptionMenuWasVisible())
         {
             _pauseMenu.ToggleOptionMenu();
@@ -33,6 +36,5 @@ public class UIManager : MonoBehaviour
         }
 
         _pauseMenu.gameObject.SetActive(!_pauseMenu.gameObject.activeInHierarchy);        
-        Time.timeScale = _pauseMenu.gameObject.activeInHierarchy ? 0f : 1f;
     }
 }
