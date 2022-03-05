@@ -1,7 +1,7 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed = 0.0f;
@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidBody;
     private float _movementX;
     private float _movementY;
-
-    PlayerForm[] playeforms;
 
     private void Start()
     {
@@ -68,15 +66,10 @@ public class PlayerController : MonoBehaviour
             if (eatable.ChangePlayerForm)
             {
                 //changer forme du joueur
-
-                PlayerForm form = playeforms.FirstOrDefault(x => x.PlayerFormEnum == eatable.PlayerFormEnum);
-
             }
 
             Destroy(eatable.gameObject);
             Debug.Log("Bitoniau");
         }
-
-
     }
 }
