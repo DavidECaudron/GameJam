@@ -30,6 +30,14 @@ public class SphereController : MonoBehaviour
         _movementY = movementVector.y;
     }
 
+    private void OnFusion()
+    {
+        // GameManager.Instance.GetPlayer()/*.gameObject.GetComponent<PlayerController>().Split(false)*/;
+        FindObjectOfType<PlayerController>().Split(false);
+        Debug.Log("fusion");
+        Destroy(this.gameObject);
+    }
+
     private void Rotation()
     {
         Vector3 direction = _rigidBody.velocity;

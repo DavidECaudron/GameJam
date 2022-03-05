@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject _sphere;
+    [SerializeField] private MeshRenderer _sphereMesh;
+    [SerializeField] private SphereCollider _sphereCollider;
+
     [SerializeField] private float _speed = 0.0f;
 
     private Rigidbody _rigidBody;
@@ -32,7 +36,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnSplit()
     {
-        this.GetComponent<PlayerInput>().enabled = false;
+        Instantiate(_sphere, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1.0f), Quaternion.identity);
+        Split(true);
         Debug.Log("split");
     }
 
@@ -57,6 +62,13 @@ public class PlayerController : MonoBehaviour
         {
             _rigidBody.angularVelocity = Vector3.zero;
         }
+    }
+
+    public void Split(bool test)
+    {
+        this.GetComponent<PlayerInput>().enabled = !test;
+        _sphereMesh.enabled = !test;
+        _sphereCollider.enabled = !test;
     }
 
     private void OnTriggerEnter(Collider other)
