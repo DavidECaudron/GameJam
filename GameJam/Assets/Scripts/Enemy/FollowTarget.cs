@@ -8,9 +8,12 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private EnemyPath _path;
     [SerializeField] private float _distanceForNextTarget = .5f;
+    [SerializeField] private float _chasingDistance = 10f;
 
     private Vector3 _pathTargetPosition;
     private bool _chasing;
+    private Vector3 _positionBeforeChasing;
+    private bool _backInLastPosition;
 
     private void Start()
     {
@@ -32,22 +35,61 @@ public class FollowTarget : MonoBehaviour
 
     private void FollowPath()
     {
-        if (GetNextPathPosition())
+        if (_backInLastPosition)
+        {
+            _agent.SetDestination(_positionBeforeChasing);
+
+            if (CheckDistance(_positionBeforeChasing, _distanceForNextTarget))
+            {
+                _backInLastPosition = false;
+                _agent.SetDestination(_pathTargetPosition);
+            }
+
+            return;
+        }
+
+        if (CheckDistance(_pathTargetPosition, _distanceForNextTarget))
         {
             _pathTargetPosition = _path.GetNextPosition();
             _agent.SetDestination(_pathTargetPosition);
-        }        
+        }
     }
 
     private void ChaseTarget()
     {
-        //TODO
+        if (CheckDistance(_target.transform.position, _chasingDistance))
+        {
+            _agent.SetDestination(_target.transform.position);
+        }
+        else
+        {
+            StopChasing();
+        }
     }
 
-
-    private bool GetNextPathPosition()
+    public void StopChasing()
     {
-        float distance = Vector3.Distance(transform.position, _pathTargetPosition);
-        return distance <= _distanceForNextTarget;
+        _chasing = false;
+        _target = null;
+        _backInLastPosition = true;
+    }
+
+    public void StartChasing(Transform target)
+    {
+        _target = target;
+        _positionBeforeChasing = transform.position;
+        _chasing = true;
+    }
+
+    private bool CheckDistance(Vector3 targetPosition, float maxDistance)
+    {
+        float distance = Vector3.Distance(transform.position, targetPosition);
+        return distance <= maxDistance;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _chasingDistance);
     }
 }

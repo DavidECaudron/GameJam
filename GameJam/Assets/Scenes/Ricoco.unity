@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 1311145711}
+    - target: {fileID: 195230692, guid: 14f94535e1329574c81925ca9a330f70, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1146182040137168866, guid: 14f94535e1329574c81925ca9a330f70, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -670,8 +674,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 84139023, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972529269, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 206616992658186270, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 234026973645514800, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480430357080763023, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2271095911617614899, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
@@ -717,6 +737,14 @@ PrefabInstance:
     - target: {fileID: 2271095911617614899, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883724363746815737, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009411504026861555, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
