@@ -24,6 +24,26 @@ public class SaveManager : MonoBehaviour
         return Path.Combine(Application.persistentDataPath, _saveFileName);
     }
 
+    public void Save(int levelReached)
+    {
+        try
+        {
+            string jsonString = JsonUtility.ToJson(new SaveData() { LevelReached = levelReached }, true);
+            string path = GetSavePath();
+
+            if (!File.Exists(path))
+            {
+                File.Create(path);
+            }
+
+            File.WriteAllText(path, jsonString, System.Text.Encoding.UTF8);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error while saving data" + System.Environment.NewLine + ex.Message);
+        }
+    }
+
 
     public SaveData GetSaveData()
     {
@@ -41,11 +61,11 @@ public class SaveManager : MonoBehaviour
             {
                 Debug.LogError("Error while deserializing SaveData" + System.Environment.NewLine + ex.Message);
                 return new SaveData();
-            }            
+            }
         }
         else
         {
-            //TODO créer une sauvegarde
+            Save(0);
             return new SaveData();
         }
     }
