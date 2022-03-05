@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     {
         Instantiate(_sphere, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1.0f), Quaternion.identity);
         Split(true);
-        Debug.Log("split");
     }
 
     /*
