@@ -17,6 +17,17 @@ public class FollowTarget : MonoBehaviour
 
     private void Start()
     {
+        if(_path == null)
+        {
+            _path = FindObjectOfType<EnemyPath>();
+            if(_path == null)
+            {
+                Debug.LogError("Not path found");
+                gameObject.SetActive(false);
+                return;
+            }
+        }        
+
         _pathTargetPosition = _path.GetFirstPosition();
         _agent.SetDestination(_pathTargetPosition);
     }

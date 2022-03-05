@@ -235,3 +235,4 @@ MonoBehaviour:
   _fadingTime: 2
   _canvasGroup: {fileID: 4504015033485894713}
   _mainMenuSceneName: MainMenuScene
+  _enemyPrefab: {fileID: 1146182040137168866, guid: 14f94535e1329574c81925ca9a330f70, type: 3}
