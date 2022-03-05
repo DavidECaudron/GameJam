@@ -11,18 +11,6 @@ public class GameManager : MonoBehaviour
     private Player _player;
     public static GameManager Instance;
 
-    float remainingTime = 5f;
-
-    private void Update()
-    {
-        remainingTime -= Time.deltaTime;
-        if (remainingTime <= 0)
-        {
-            LoadScene(SceneManager.GetActiveScene().buildIndex);
-            remainingTime = float.MaxValue;
-        }
-    }
-
     private void Awake()
     {
         if (Instance != null)
