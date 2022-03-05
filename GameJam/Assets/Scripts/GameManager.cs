@@ -39,6 +39,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadSceneWithIndex(sceneIndex));
     }
 
+    public void LoadScene(string sceneName)
+    {        
+        StartCoroutine(LoadSceneWithIndex(GetSceneIndex(sceneName)));
+    }
+
+    private int GetSceneIndex(string sceneName)
+    {
+        return SceneManager.GetSceneByName(sceneName).buildIndex;
+    }
+
     private IEnumerator LoadSceneWithIndex(int sceneIndex)
     {
         #region Fade In
