@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] CanvasGroup _canvasGroup;
     [SerializeField] string _mainMenuSceneName;
 
+    [SerializeField] GameObject _enemyPrefab;
+
     private Player _player;
     public static GameManager Instance;
 
@@ -52,6 +54,20 @@ public class GameManager : MonoBehaviour
         return _player;
     }
 
+    public void SetupScene()
+    {
+        LevelData levelData = FindObjectOfType<LevelData>();
+        if (levelData == null) return;
+
+        StartCoroutine(SpawnEnemy(levelData.SpawnEnemyTime, levelData.EnemySpawnPosition));
+    }
+
+    private IEnumerator SpawnEnemy(float waitingTime, Transform trsf)
+    {
+        yield return new WaitForSeconds(waitingTime);
+        Instantiate(_enemyPrefab, trsf.position, trsf.rotation);
+    }
+
     public void LoadScene(int sceneIndex)
     {
         StartCoroutine(LoadSceneWithIndex(sceneIndex));
@@ -70,6 +86,7 @@ public class GameManager : MonoBehaviour
         }
         #endregion
 
+        StopAllCoroutines();
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!asyncOperation.isDone)
@@ -88,6 +105,11 @@ public class GameManager : MonoBehaviour
         #endregion
 
         GamePaused = false;
+
+        if (!OnMainMenu())
+        {
+            SetupScene();
+        }
 
         yield return null;
     }
