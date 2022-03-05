@@ -32,6 +32,16 @@ public class PlayerController : MonoBehaviour
         _movementY = movementVector.y;
     }
 
+    private void OnSplit()
+    {
+        Debug.Log("split");
+    }
+
+    private void OnFusion()
+    {
+        Debug.Log("fusion");
+    }
+
     private void Rotation()
     {
         Vector3 direction = _rigidBody.velocity;
