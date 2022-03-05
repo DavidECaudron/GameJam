@@ -275,17 +275,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 348980912, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
-      propertyPath: _sphereMesh
+      propertyPath: _eye
+      value: 
+      objectReference: {fileID: 2212977577671818382, guid: 905b8b48e237f0e4380beac174b2103e, type: 3}
+    - target: {fileID: 348980912, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
+      propertyPath: _eyeMesh
       value: 
       objectReference: {fileID: 1972529271}
     - target: {fileID: 348980912, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
-      propertyPath: _sphereCollider
+      propertyPath: _eyeCollider
       value: 
       objectReference: {fileID: 84139025}
-    - target: {fileID: 1972529269, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
-      propertyPath: m_Name
-      value: Sphere
-      objectReference: {fileID: 0}
     - target: {fileID: 206616992658186270, guid: b698c202fb38532438d2d3fb68e15996, type: 3}
       propertyPath: m_Name
       value: Player

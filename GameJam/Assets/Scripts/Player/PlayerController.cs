@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject _sphere;
-    [SerializeField] private MeshRenderer _sphereMesh;
-    [SerializeField] private SphereCollider _sphereCollider;
+    [SerializeField] private GameObject _eye;
+    [SerializeField] private MeshRenderer _eyeMesh;
+    [SerializeField] private SphereCollider _eyeCollider;
 
     [SerializeField] private float _speed = 0.0f;
 
@@ -29,30 +29,20 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
-
         _movementX = movementVector.x;
         _movementY = movementVector.y;
     }
 
     private void OnSplit()
     {
-        Instantiate(_sphere, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1.0f), Quaternion.identity);
+        Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1.0f), Quaternion.identity);
         Split(true);
     }
-
-    /*
-    private void OnFusion()
-    {
-        this.GetComponent<PlayerInput>().enabled = true;
-        Debug.Log("fusion");
-    }
-    */
 
     private void Rotation()
     {
         Vector3 direction = _rigidBody.velocity;
         direction.y = 0f;
-
         if (direction.sqrMagnitude > 0.1f)
         {
             _rigidBody.rotation = Quaternion.LookRotation(direction, new Vector3(0, 1, 0));
@@ -66,12 +56,7 @@ public class PlayerController : MonoBehaviour
     public void Split(bool test)
     {
         this.GetComponent<PlayerInput>().enabled = !test;
-        _sphereMesh.enabled = !test;
-        _sphereCollider.enabled = !test;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
+        _eyeMesh.enabled = !test;
+        _eyeCollider.enabled = !test;
     }
 }
