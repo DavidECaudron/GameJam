@@ -32,13 +32,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnSplit()
     {
+        this.GetComponent<PlayerInput>().enabled = false;
         Debug.Log("split");
     }
 
+    /*
     private void OnFusion()
     {
+        this.GetComponent<PlayerInput>().enabled = true;
         Debug.Log("fusion");
     }
+    */
 
     private void Rotation()
     {
