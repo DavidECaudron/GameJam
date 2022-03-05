@@ -2,17 +2,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class LimbModelController : MonoBehaviour
 {
-    [SerializeField] private GameObject _eye;
-    [SerializeField] private MeshRenderer _eyeMesh;
-    [SerializeField] private SphereCollider _eyeCollider;
-
     [SerializeField] private float _speed = 0.0f;
 
     private Rigidbody _rigidBody;
     private float _movementX;
     private float _movementY;
+
+    private bool _isFusionnable = false;
+    private string _targetTag = null;
 
     private void Start()
     {
@@ -33,15 +32,14 @@ public class PlayerController : MonoBehaviour
         _movementY = movementVector.y;
     }
 
-    private void OnSplit()
+    private void OnFusion()
     {
-        Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1.0f), Quaternion.identity);
-        Split(true);
-    }
-
-    private void OnInteraction()
-    {
-
+        if (_isFusionnable && _targetTag == "Player")
+        {
+            // GameManager.Instance.GetPlayer().gameObject.GetComponent<PlayerController>().Split(false);
+            FindObjectOfType<ModelController>().ModelReset();
+            Destroy(this.gameObject);
+        }
     }
 
     private void Rotation()
@@ -58,10 +56,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Split(bool test)
+    private void OnTriggerEnter(Collider other)
     {
-        this.GetComponent<PlayerInput>().enabled = !test;
-        _eyeMesh.enabled = !test;
-        _eyeCollider.enabled = !test;
+        _targetTag = other.tag;
+        _isFusionnable = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _targetTag = null;
+        _isFusionnable = false;
     }
 }
