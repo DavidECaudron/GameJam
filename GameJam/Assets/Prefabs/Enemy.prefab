@@ -72,6 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _agent: {fileID: 1929971986258765335}
+  _path: {fileID: 0}
+  _distanceForNextTarget: 0.5
 --- !u!135 &1208829419
 SphereCollider:
   m_ObjectHideFlags: 0

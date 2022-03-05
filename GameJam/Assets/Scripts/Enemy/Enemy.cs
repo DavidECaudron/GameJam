@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     {
         _followTarget = GetComponent<FollowTarget>();
         Player player = GameManager.Instance.GetPlayer();
-        player.OnPlayerDie += _followTarget.StopFollow;
+        //player.OnPlayerDie += _followTarget.StopChasing;
     }
 
     private void OnTriggerEnter(Collider other)

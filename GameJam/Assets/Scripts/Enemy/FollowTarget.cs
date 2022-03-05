@@ -6,31 +6,48 @@ public class FollowTarget : MonoBehaviour
 {
     [SerializeField] private Transform _target;
     [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private EnemyPath _path;
+    [SerializeField] private float _distanceForNextTarget = .5f;
 
-    private bool _followTarget = true;
+    private Vector3 _pathTargetPosition;
+    private bool _chasing;
 
-    public void StopFollow()
+    private void Start()
     {
-        _followTarget = false;
-        _agent.isStopped = true;
-    }
-
-    public void StartFollow()
-    {
-        _followTarget = true;
-    }
-
-    public void SetTarget(Transform target)
-    {
-        _agent.isStopped = true;
-        _target = target;
-
-        StartFollow();
+        _pathTargetPosition = _path.GetFirstPosition();
+        _agent.SetDestination(_pathTargetPosition);
     }
 
     private void Update()
     {
-        if (_target == null || !_followTarget) return;
-        _agent.SetDestination(_target.transform.position);
+        if (_chasing)
+        {
+            ChaseTarget();
+        }
+        else
+        {
+            FollowPath();
+        }
+    }
+
+    private void FollowPath()
+    {
+        if (GetNextPathPosition())
+        {
+            _pathTargetPosition = _path.GetNextPosition();
+            _agent.SetDestination(_pathTargetPosition);
+        }        
+    }
+
+    private void ChaseTarget()
+    {
+        //TODO
+    }
+
+
+    private bool GetNextPathPosition()
+    {
+        float distance = Vector3.Distance(transform.position, _pathTargetPosition);
+        return distance <= _distanceForNextTarget;
     }
 }
