@@ -32,8 +32,7 @@ public class SphereController : MonoBehaviour
 
     private void OnFusion()
     {
-        // GameManager.Instance.GetPlayer()/*.gameObject.GetComponent<PlayerController>().Split(false)*/;
-        FindObjectOfType<PlayerController>().Split(false);
+        GameManager.Instance.GetPlayer().gameObject.GetComponent<PlayerController>().Split(false);
         Debug.Log("fusion");
         Destroy(this.gameObject);
     }
