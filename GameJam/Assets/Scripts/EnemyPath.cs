@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyPath : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class EnemyPath : MonoBehaviour
         return _path[0].transform.position;
     }
 
-    public Vector3 GetNextPosition()
+    public Vector3 GetNextPosition(NavMeshAgent agent)
     {
         if (index == _path.Length - 1)
         {
@@ -24,8 +25,25 @@ public class EnemyPath : MonoBehaviour
 
         index = _invertPath ? --index : ++index;
 
-        return _path[index].transform.position;
+        Vector3 position = _path[index].transform.position;
+
+        if (!VerifyPath(agent,position))
+        {
+            _invertPath = !_invertPath;
+            position = GetNextPosition(agent);
+        }
+
+        return position;
     }
+
+    private bool VerifyPath(NavMeshAgent agent, Vector3 targetPosition)
+    {
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(targetPosition, path);
+
+        return path.status != NavMeshPathStatus.PathPartial;
+    }
+
 
     private void OnDrawGizmos()
     {

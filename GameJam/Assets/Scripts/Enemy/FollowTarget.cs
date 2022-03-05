@@ -50,7 +50,7 @@ public class FollowTarget : MonoBehaviour
 
         if (CheckDistance(_pathTargetPosition, _distanceForNextTarget))
         {
-            _pathTargetPosition = _path.GetNextPosition();
+            _pathTargetPosition = _path.GetNextPosition(_agent);
             _agent.SetDestination(_pathTargetPosition);
         }
     }
