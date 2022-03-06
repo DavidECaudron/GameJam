@@ -18,13 +18,22 @@ public class ModelController : MonoBehaviour
     private float _movementX;
     private float _movementY;
 
+    private PlayerInput _playerInput;
+
+    private Animator _animator;
+
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _playerInput = GetComponent<PlayerInput>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
+        bool condition = (_movementX != 0.0f || _movementY != 0.0f);
+        _animator.SetBool("Move", condition);
+
         Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
         _rigidBody.AddForce(movement * _speed);
         Rotation();
@@ -36,6 +45,7 @@ public class ModelController : MonoBehaviour
         _movementX = movementVector.x;
         _movementY = movementVector.y;
     }
+
     /*
     private void OnSplit()
     {
@@ -61,26 +71,26 @@ public class ModelController : MonoBehaviour
         if (inputVector.x > 0.0f)
         {
             _leftEye.enabled = false;
-            this.GetComponent<PlayerInput>().enabled = false;
-            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
+            _playerInput.enabled = false;
+            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.x < 0.0f)
         {
             _rightEye.enabled = false;
-            this.GetComponent<PlayerInput>().enabled = false;
-            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
+            _playerInput.enabled = false;
+            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y > 0.0f)
         {
             _leftArm.enabled = false;
-            this.GetComponent<PlayerInput>().enabled = false;
-            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
+            _playerInput.enabled = false;
+            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y < 0.0f)
         {
             _rightArm.enabled = false;
-            this.GetComponent<PlayerInput>().enabled = false;
-            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
+            _playerInput.enabled = false;
+            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
     }
 
@@ -104,6 +114,6 @@ public class ModelController : MonoBehaviour
         _rightEye.enabled = true;
         _leftArm.enabled = true;
         _rightArm.enabled = true;
-        this.GetComponent<PlayerInput>().enabled = true;
+        _playerInput.enabled = true;
     }
 }
