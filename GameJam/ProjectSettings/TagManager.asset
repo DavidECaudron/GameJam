@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - EatableObject
+  - KeyOne
+  - KeyTwo
+  - KeyThree
   layers:
   - Default
   - TransparentFX
