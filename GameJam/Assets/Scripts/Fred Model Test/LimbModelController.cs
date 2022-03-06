@@ -13,13 +13,19 @@ public class LimbModelController : MonoBehaviour
     private bool _isFusionnable = false;
     private string _targetTag = null;
 
+    private Animator _animator;
+
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
+        bool condition = (_movementX != 0.0f || _movementY != 0.0f);
+        _animator.SetBool("Move", condition);
+
         Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
         _rigidBody.AddForce(movement * _speed);
         Rotation();
