@@ -804,10 +804,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7820750960352375581, guid: ea55a28e367e5d348bc67fdd551f6cd7, type: 3}
-      propertyPath: PlayerStartScaleSize
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7820750960352375582, guid: ea55a28e367e5d348bc67fdd551f6cd7, type: 3}
       propertyPath: m_Name
       value: LevelData

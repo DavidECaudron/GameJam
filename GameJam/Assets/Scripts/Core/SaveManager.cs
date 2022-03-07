@@ -55,6 +55,11 @@ public class SaveManager : MonoBehaviour
             try
             {
                 SaveData save = JsonUtility.FromJson<SaveData>(fileTxt);
+                if(save == null)
+                {
+                    Save(0);
+                    return new SaveData();
+                }
                 return save;
             }
             catch (System.Exception ex)
