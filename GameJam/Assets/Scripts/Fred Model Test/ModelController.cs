@@ -17,6 +17,7 @@ public class ModelController : MonoBehaviour
     private Rigidbody _rigidBody;
     private float _movementX;
     private float _movementY;
+    private bool _canMoveAnimation;
 
     private PlayerInput _playerInput;
 
@@ -34,8 +35,13 @@ public class ModelController : MonoBehaviour
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
         _animator.SetBool("Move", condition);
 
-        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
-        _rigidBody.AddForce(movement * _speed);
+        if (!_canMoveAnimation)
+        {
+            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.angularVelocity = Vector3.zero;
+            return;
+        }
+        Movement();
         Rotation();
     }
 
@@ -46,24 +52,6 @@ public class ModelController : MonoBehaviour
         _movementY = movementVector.y;
     }
 
-    /*
-    private void OnSplit()
-    {
-        _leftEye.enabled = false;
-        _rightEye.enabled = false;
-        _leftArm.enabled = false;
-        _rightArm.enabled = false;
-    }
-    */
-    /*
-    private void OnFusion()
-    {
-        _leftEye.enabled = true;
-        _rightEye.enabled = true;
-        _leftArm.enabled = true;
-        _rightArm.enabled = true;
-    }
-    */
 
     private void OnSplitModel(InputValue inputValue)
     {
@@ -94,6 +82,12 @@ public class ModelController : MonoBehaviour
         }
     }
 
+    private void Movement()
+    {
+        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
+        _rigidBody.AddForce(movement * _speed);
+    }
+
     private void Rotation()
     {
         Vector3 direction = _rigidBody.velocity;
@@ -116,4 +110,18 @@ public class ModelController : MonoBehaviour
         _rightArm.enabled = true;
         _playerInput.enabled = true;
     }
+
+    #region Animation
+    private void CanMoveAnimation()
+    {
+        _canMoveAnimation = true;
+    }
+
+    private void CantMoveAnimation()
+    {
+        _canMoveAnimation = false;
+    }
+
+
+    #endregion
 }
