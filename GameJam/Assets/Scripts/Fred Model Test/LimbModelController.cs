@@ -4,12 +4,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class LimbModelController : MonoBehaviour, IControlableObject
 {
-    [SerializeField] private float _speed = 0.0f;
+    [SerializeField] private float _impulseStrength = 0.0f;
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rigidBody;
     [SerializeField] private ModelController _modelController;
-    [SerializeField] private float _impulseStrength = 0.0f;
 
     private float _movementX;
     private float _movementY;
