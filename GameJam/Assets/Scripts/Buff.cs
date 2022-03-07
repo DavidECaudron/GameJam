@@ -8,9 +8,4 @@ public class Buff : MonoBehaviour
         get { return _size; }
         private set { _size = value; }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.tag);
-    }
 }

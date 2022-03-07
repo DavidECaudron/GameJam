@@ -9,7 +9,7 @@ public class InteractTrigger : MonoBehaviour
         if (other.tag == "Buff")
         {
             Buff buff = other.GetComponentInParent<Buff>();
-            this.transform.localScale = new Vector3(_parent.transform.localScale.x + buff.Size, _parent.transform.localScale.y + buff.Size, _parent.transform.localScale.z + buff.Size);
+            _parent.transform.localScale = new Vector3(_parent.transform.localScale.x + buff.Size, _parent.transform.localScale.y + buff.Size, _parent.transform.localScale.z + buff.Size);
             Destroy(buff.gameObject);
         }
     }
