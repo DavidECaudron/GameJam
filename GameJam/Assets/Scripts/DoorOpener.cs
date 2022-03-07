@@ -1,16 +1,28 @@
 using UnityEngine;
 
+public enum DoorOpenerType
+{
+    Crank = 0,
+    Slab = 1
+}
+
+
 [RequireComponent(typeof(Animator))]
 public class DoorOpener : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private bool _uniqueUtilisation;
-
+    [SerializeField] private DoorOpenerType OpenerType;
+    private bool _uniqueUtilisation;
     private bool _doorIsOpen;
 
     public delegate void DoorOpenerActivated();
     public event DoorOpenerActivated DoorOpenerEnableEvent;
     public event DoorOpenerActivated DoorOpenerDisableEvent;
+
+    private void Start()
+    {
+        _uniqueUtilisation = OpenerType == DoorOpenerType.Crank;
+    }
 
     private void EnableOpener()
     {
@@ -29,8 +41,7 @@ public class DoorOpener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_doorIsOpen) return;
-        if (_uniqueUtilisation) return;
+        if (_doorIsOpen || _uniqueUtilisation) return;
         if (other.tag == "Player")
         {
             EnableOpener();
@@ -39,8 +50,7 @@ public class DoorOpener : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_doorIsOpen) return;
-        if (_uniqueUtilisation) return;
+        if (_doorIsOpen || _uniqueUtilisation) return;
         if (other.tag == "Player")
         {
             DisableOpener();
