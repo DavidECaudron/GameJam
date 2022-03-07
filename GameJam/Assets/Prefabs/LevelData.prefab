@@ -109,3 +109,4 @@ MonoBehaviour:
   SpawnEnemyTime: 10
   EnemySpawnPosition: {fileID: 7820750959971520935}
   PlayerSpawnPosition: {fileID: 7820750959624957718}
+  PlayerStartScaleSize: 1

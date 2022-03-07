@@ -6,4 +6,5 @@ public class LevelData : MonoBehaviour
     [Min(0f)] public float SpawnEnemyTime;
     public Transform EnemySpawnPosition;
     public Transform PlayerSpawnPosition;
+    [Min(1f)] public float PlayerStartScaleSize;
 }
