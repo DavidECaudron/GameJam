@@ -26,9 +26,11 @@ public class ModelController : MonoBehaviour, IControlableObject
     private float _movementX;
     private float _movementY;
     private bool _canMoveAnimation;
+    public bool Alive;
 
     private void Start()
     {
+        Alive = true;
         GameManager.Instance.AddControlableObject(this);
     }
 
@@ -160,13 +162,11 @@ public class ModelController : MonoBehaviour, IControlableObject
         return this.transform;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Die()
     {
-        if (other.tag == "Buff")
-        {
-            Buff buff = other.GetComponentInParent<Buff>();
-            this.transform.localScale = new Vector3(this.transform.localScale.x + buff.Size, this.transform.localScale.y + buff.Size, this.transform.localScale.z + buff.Size);
-            Destroy(buff.gameObject);
-        }
+        Debug.Log("Die");
+        Alive = false;
+        //PlayDeathSound();
+        //Jouer animation mort
     }
 }

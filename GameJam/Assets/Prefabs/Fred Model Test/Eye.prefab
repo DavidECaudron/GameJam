@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5789610496627833616}
   m_Layer: 0
   m_Name: Eye
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,10 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ed425e131d2e94086da7ebfd73ca4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
+  _impulseStrength: 30
   _playerInput: {fileID: 3933774920532386791}
   _animator: {fileID: 5789610496627833616}
   _rigidBody: {fileID: 1628963323}
+  _modelController: {fileID: 0}
 --- !u!95 &5789610496627833616
 Animator:
   serializedVersion: 3
@@ -329,6 +330,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 82ac4df9f706b6f458684b1d6ddc1744, type: 3}
       propertyPath: m_Name
       value: TestFred006
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 82ac4df9f706b6f458684b1d6ddc1744, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2234973215567157552, guid: 82ac4df9f706b6f458684b1d6ddc1744, type: 3}
       propertyPath: m_LocalRotation.x

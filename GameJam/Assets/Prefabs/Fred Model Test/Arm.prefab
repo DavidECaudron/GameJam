@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 2089422640467534968}
   m_Layer: 0
   m_Name: Arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,10 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ed425e131d2e94086da7ebfd73ca4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 25
+  _impulseStrength: 30
   _playerInput: {fileID: 5977124287682006245}
   _animator: {fileID: 2089422640467534968}
   _rigidBody: {fileID: 1951469042}
+  _modelController: {fileID: 0}
 --- !u!95 &2089422640467534968
 Animator:
   serializedVersion: 3
@@ -365,6 +366,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 43fa5f81b8d551641810b5c482490687, type: 3}
       propertyPath: m_Name
       value: TestFred005
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 43fa5f81b8d551641810b5c482490687, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4453602832307568353, guid: 43fa5f81b8d551641810b5c482490687, type: 3}
       propertyPath: m_LocalPosition.x
