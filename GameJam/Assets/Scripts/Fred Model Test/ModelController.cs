@@ -18,7 +18,10 @@ public class ModelController : MonoBehaviour, IControlableObject
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
 
-    private Buff _buff;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip[] _walkSounds;
+    [SerializeField] private AudioClip _eatSound;
+    [SerializeField] private AudioClip _deathSound;
 
     private float _movementX;
     private float _movementY;
@@ -119,6 +122,21 @@ public class ModelController : MonoBehaviour, IControlableObject
         _canMoveAnimation = false;
     }
 
+    private void PlayWalkSound()
+    {
+        int index = Random.Range(0, _walkSounds.Length);
+        AudioManager.Instance.PlaySoundAt(_walkSounds[index], transform);
+    }
+
+    private void PlayEatSound()
+    {
+        AudioManager.Instance.PlaySoundAt(_eatSound, transform);
+    }
+
+    private void PlayDeathSound()
+    {
+        AudioManager.Instance.PlaySoundAt(_deathSound, transform);
+    }
 
     #endregion
 
@@ -146,9 +164,9 @@ public class ModelController : MonoBehaviour, IControlableObject
     {
         if (other.tag == "Buff")
         {
-            _buff = other.GetComponentInParent<Buff>();
-            this.transform.localScale = new Vector3(this.transform.localScale.x + _buff.Size, this.transform.localScale.y + _buff.Size, this.transform.localScale.z + _buff.Size);
-            Destroy(_buff.gameObject);
+            Buff buff = other.GetComponentInParent<Buff>();
+            this.transform.localScale = new Vector3(this.transform.localScale.x + buff.Size, this.transform.localScale.y + buff.Size, this.transform.localScale.z + buff.Size);
+            Destroy(buff.gameObject);
         }
     }
 }

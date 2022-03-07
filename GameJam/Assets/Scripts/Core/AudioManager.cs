@@ -46,4 +46,19 @@ public class AudioManager : MonoBehaviour
         _soundEffectMixer.audioMixer.GetFloat(_soundEffectVolumeParameterName, out value);
         return value;
     }
+
+    public void PlaySoundAt(AudioClip clip, Transform position)
+    {
+        GameObject obj = new GameObject() { name = "TempAudio" };
+        obj.transform.position = position.position;
+
+        obj.AddComponent<AudioSource>();
+        AudioSource source = obj.GetComponent<AudioSource>();
+
+        source.outputAudioMixerGroup = _soundEffectMixer;
+        source.clip = clip;
+        source.Play();
+
+        Destroy(obj, clip.length);
+    }
 }

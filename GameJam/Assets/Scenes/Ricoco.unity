@@ -960,14 +960,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EssentialLoader
       objectReference: {fileID: 0}
-    - target: {fileID: 4985872944116804321, guid: 199ecb8d07c0a9442ac64c99526f43a8, type: 3}
-      propertyPath: _essentialObjects.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4985872944116804321, guid: 199ecb8d07c0a9442ac64c99526f43a8, type: 3}
-      propertyPath: _essentialObjects.Array.data[4]
-      value: 
-      objectReference: {fileID: 9220897583632017334, guid: 7d07dd3e5d1d775439314237c4f39a40, type: 3}
     - target: {fileID: 4985872944116804322, guid: 199ecb8d07c0a9442ac64c99526f43a8, type: 3}
       propertyPath: m_RootOrder
       value: 4
