@@ -14,6 +14,7 @@ public class LimbModelController : MonoBehaviour
     private string _targetTag = null;
 
     private Animator _animator;
+    private bool _canMoveAnimation;
 
     private void Start()
     {
@@ -26,8 +27,14 @@ public class LimbModelController : MonoBehaviour
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
         _animator.SetBool("Move", condition);
 
-        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
-        _rigidBody.AddForce(movement * _speed);
+        if (!_canMoveAnimation)
+        {
+            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.angularVelocity = Vector3.zero;
+            return;
+        }
+
+        Movement();
         Rotation();
     }
 
@@ -46,6 +53,12 @@ public class LimbModelController : MonoBehaviour
             FindObjectOfType<ModelController>().ModelReset();
             Destroy(this.gameObject);
         }
+    }
+
+    private void Movement()
+    {
+        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
+        _rigidBody.AddForce(movement * _speed);
     }
 
     private void Rotation()
@@ -73,4 +86,18 @@ public class LimbModelController : MonoBehaviour
         _targetTag = null;
         _isFusionnable = false;
     }
+
+    #region Animation
+    private void CanMoveAnimation()
+    {
+        _canMoveAnimation = true;
+    }
+
+    private void CantMoveAnimation()
+    {
+        _canMoveAnimation = false;
+    }
+
+
+    #endregion
 }
