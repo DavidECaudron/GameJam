@@ -1,18 +1,23 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Loading screen", order = 0)]
-    [SerializeField] [Range(.5f, 5f)]float _fadingTime = 2f;
+    [SerializeField] [Range(.5f, 5f)] float _fadingTime = 2f;
     [SerializeField] CanvasGroup _canvasGroup;
     [SerializeField] string _mainMenuSceneName;
+    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private GameObject _enemyPrefab;
 
-    [SerializeField] GameObject _enemyPrefab;
-
-    private Player _player;
+    private GameObject _playerObject;
+    private int _controlableObjectIndex;
     public static GameManager Instance;
+
+    private List<IControlableObject> _controlableObject = new List<IControlableObject>();
 
     public bool GamePaused
     {
@@ -23,6 +28,18 @@ public class GameManager : MonoBehaviour
         set
         {
             Time.timeScale = value ? 0f : 1f;
+        }
+    }
+
+    private float remainingTime = 2f;
+    private void Update()
+    {
+        remainingTime -= Time.deltaTime;
+
+        if (remainingTime <= 0f)
+        {
+            remainingTime = float.MaxValue;
+            SetupScene();
         }
     }
 
@@ -44,14 +61,9 @@ public class GameManager : MonoBehaviour
         return SceneManager.GetActiveScene().name == _mainMenuSceneName;
     }
 
-    public Player GetPlayer()
+    public GameObject GetPlayer()
     {
-        if (_player == null)
-        {
-            _player = FindObjectOfType<Player>();
-        }
-
-        return _player;
+        return _playerObject;
     }
 
     public void SetupScene()
@@ -59,6 +71,8 @@ public class GameManager : MonoBehaviour
         LevelData levelData = FindObjectOfType<LevelData>();
         if (levelData == null) return;
 
+        _playerObject = Instantiate(_playerPrefab, levelData.PlayerSpawnPosition.position, levelData.PlayerSpawnPosition.rotation);
+        FollowCam.Instance.ChangeTarget(_playerObject.transform);
         StartCoroutine(SpawnEnemy(levelData.SpawnEnemyTime, levelData.EnemySpawnPosition));
     }
 
@@ -104,6 +118,7 @@ public class GameManager : MonoBehaviour
         _canvasGroup.gameObject.SetActive(false);
         #endregion
 
+        _controlableObject.Clear();
         GamePaused = false;
 
         if (!OnMainMenu())
@@ -112,6 +127,36 @@ public class GameManager : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    public void AddControlableObject(IControlableObject obj)
+    {
+        _controlableObject.Add(obj);
+    }
+
+    public void RemoveControlableObject(IControlableObject obj)
+    {
+        _controlableObject.Remove(obj);
+    }
+
+    public void ChangeControlableObjectSpecificFocus(IControlableObject target)
+    {        
+        _controlableObject[_controlableObjectIndex].DisableController();
+        _controlableObjectIndex = _controlableObject.IndexOf(target);
+        target.EnableController();
+
+        FollowCam.Instance.ChangeTarget(target.GetTransform());
+    }
+
+    public void ChangeControlableObjectFocus()
+    {
+        _controlableObject[_controlableObjectIndex].DisableController();
+        _controlableObjectIndex++;
+        _controlableObjectIndex %= _controlableObject.Count;
+        IControlableObject controlableObject = _controlableObject[_controlableObjectIndex];
+        controlableObject.EnableController();
+
+        FollowCam.Instance.ChangeTarget(controlableObject.GetTransform());
     }
 
 }

@@ -2,24 +2,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class LimbModelController : MonoBehaviour
+public class LimbModelController : MonoBehaviour, IControlableObject
 {
     [SerializeField] private float _speed = 0.0f;
+    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Rigidbody _rigidBody;
 
-    private Rigidbody _rigidBody;
     private float _movementX;
     private float _movementY;
 
     private bool _isFusionnable = false;
     private string _targetTag = null;
 
-    private Animator _animator;
     private bool _canMoveAnimation;
 
     private void Start()
     {
-        _rigidBody = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        GameManager.Instance.AddControlableObject(this);
+        GameManager.Instance.ChangeControlableObjectSpecificFocus(this);
     }
 
     private void FixedUpdate()
@@ -49,8 +50,8 @@ public class LimbModelController : MonoBehaviour
     {
         if (_isFusionnable && _targetTag == "Player")
         {
-            // GameManager.Instance.GetPlayer().gameObject.GetComponent<PlayerController>().Split(false);
             FindObjectOfType<ModelController>().ModelReset();
+            GameManager.Instance.RemoveControlableObject(this);
             Destroy(this.gameObject);
         }
     }
@@ -98,6 +99,25 @@ public class LimbModelController : MonoBehaviour
         _canMoveAnimation = false;
     }
 
-
     #endregion
+
+    void OnChangeFocus()
+    {
+        GameManager.Instance.ChangeControlableObjectFocus();
+    }
+
+    public void EnableController()
+    {
+        _playerInput.ActivateInput();
+    }
+
+    public void DisableController()
+    {
+        _playerInput.DeactivateInput();
+    }
+
+    public Transform GetTransform()
+    {
+        return this.transform;
+    }
 }

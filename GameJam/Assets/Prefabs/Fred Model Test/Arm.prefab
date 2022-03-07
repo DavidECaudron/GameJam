@@ -201,6 +201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 25
+  _playerInput: {fileID: 5977124287682006245}
+  _animator: {fileID: 2089422640467534968}
+  _rigidBody: {fileID: 1951469042}
 --- !u!95 &2089422640467534968
 Animator:
   serializedVersion: 3

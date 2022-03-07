@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ModelController : MonoBehaviour
+public class ModelController : MonoBehaviour, IControlableObject
 {
     [SerializeField] private float _speed = 0.0f;
 
@@ -14,20 +14,17 @@ public class ModelController : MonoBehaviour
     [SerializeField] private GameObject _eye;
     [SerializeField] private GameObject _arm;
 
-    private Rigidbody _rigidBody;
+    [SerializeField] private Rigidbody _rigidBody;
+    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private Animator _animator;
+
     private float _movementX;
     private float _movementY;
     private bool _canMoveAnimation;
 
-    private PlayerInput _playerInput;
-
-    private Animator _animator;
-
     private void Start()
     {
-        _rigidBody = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
-        _animator = GetComponent<Animator>();
+        GameManager.Instance.AddControlableObject(this);
     }
 
     private void FixedUpdate()
@@ -52,32 +49,28 @@ public class ModelController : MonoBehaviour
         _movementY = movementVector.y;
     }
 
-
     private void OnSplitModel(InputValue inputValue)
     {
         Vector2 inputVector = inputValue.Get<Vector2>();
+
         if (inputVector.x > 0.0f)
         {
             _leftEye.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.x < 0.0f)
         {
             _rightEye.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y > 0.0f)
         {
             _leftArm.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y < 0.0f)
         {
             _rightArm.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
     }
@@ -109,6 +102,8 @@ public class ModelController : MonoBehaviour
         _leftArm.enabled = true;
         _rightArm.enabled = true;
         _playerInput.enabled = true;
+
+        GameManager.Instance.ChangeControlableObjectSpecificFocus(this);
     }
 
     #region Animation
@@ -124,4 +119,24 @@ public class ModelController : MonoBehaviour
 
 
     #endregion
+
+    void OnChangeFocus()
+    {
+        GameManager.Instance.ChangeControlableObjectFocus();
+    }
+
+    public void EnableController()
+    {
+        _playerInput.ActivateInput();
+    }
+
+    public void DisableController()
+    {
+        _playerInput.DeactivateInput();
+    }
+
+    public Transform GetTransform()
+    {
+        return this.transform;
+    }
 }

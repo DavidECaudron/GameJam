@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeFocus",
+                    "type": "Button",
+                    "id": "8cd2f1dc-6ed5-4066-8117-d908b2ac117d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -377,6 +386,17 @@
                     "action": "SplitModel",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "41a07cb5-b7b4-48af-b060-59c30e3d8a5e",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeFocus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

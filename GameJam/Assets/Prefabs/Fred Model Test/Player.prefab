@@ -102,6 +102,9 @@ MonoBehaviour:
   _rightArm: {fileID: 8188672154923971065}
   _eye: {fileID: 4820984735285996601, guid: 34b53367c45029647bf71eeea1ff4f77, type: 3}
   _arm: {fileID: 2775709439743688300, guid: 3cadd1e60b84b7b4096d0166fb0cc5fa, type: 3}
+  _rigidBody: {fileID: 2155500739320201999}
+  _playerInput: {fileID: 2155500739320201996}
+  _animator: {fileID: 781952682}
 --- !u!135 &2155500739320202001
 SphereCollider:
   m_ObjectHideFlags: 0
