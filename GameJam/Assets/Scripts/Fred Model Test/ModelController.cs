@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ModelController : MonoBehaviour
+public class ModelController : MonoBehaviour, IControlableObject
 {
     [SerializeField] private float _speed = 0.0f;
 
@@ -14,19 +14,22 @@ public class ModelController : MonoBehaviour
     [SerializeField] private GameObject _eye;
     [SerializeField] private GameObject _arm;
 
-    private Rigidbody _rigidBody;
+    [SerializeField] private Rigidbody _rigidBody;
+    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private Animator _animator;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip[] _walkSounds;
+    [SerializeField] private AudioClip _eatSound;
+    [SerializeField] private AudioClip _deathSound;
+
     private float _movementX;
     private float _movementY;
-
-    private PlayerInput _playerInput;
-
-    private Animator _animator;
+    private bool _canMoveAnimation;
 
     private void Start()
     {
-        _rigidBody = GetComponent<Rigidbody>();
-        _playerInput = GetComponent<PlayerInput>();
-        _animator = GetComponent<Animator>();
+        GameManager.Instance.AddControlableObject(this);
     }
 
     private void FixedUpdate()
@@ -34,8 +37,13 @@ public class ModelController : MonoBehaviour
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
         _animator.SetBool("Move", condition);
 
-        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
-        _rigidBody.AddForce(movement * _speed);
+        if (!_canMoveAnimation)
+        {
+            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.angularVelocity = Vector3.zero;
+            return;
+        }
+        Movement();
         Rotation();
     }
 
@@ -46,52 +54,36 @@ public class ModelController : MonoBehaviour
         _movementY = movementVector.y;
     }
 
-    /*
-    private void OnSplit()
-    {
-        _leftEye.enabled = false;
-        _rightEye.enabled = false;
-        _leftArm.enabled = false;
-        _rightArm.enabled = false;
-    }
-    */
-    /*
-    private void OnFusion()
-    {
-        _leftEye.enabled = true;
-        _rightEye.enabled = true;
-        _leftArm.enabled = true;
-        _rightArm.enabled = true;
-    }
-    */
-
     private void OnSplitModel(InputValue inputValue)
     {
         Vector2 inputVector = inputValue.Get<Vector2>();
+
         if (inputVector.x > 0.0f)
         {
             _leftEye.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.x < 0.0f)
         {
             _rightEye.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y > 0.0f)
         {
             _leftArm.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y < 0.0f)
         {
             _rightArm.enabled = false;
-            _playerInput.enabled = false;
             Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
         }
+    }
+
+    private void Movement()
+    {
+        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
+        _rigidBody.AddForce(movement * _speed);
     }
 
     private void Rotation()
@@ -115,5 +107,66 @@ public class ModelController : MonoBehaviour
         _leftArm.enabled = true;
         _rightArm.enabled = true;
         _playerInput.enabled = true;
+
+        GameManager.Instance.ChangeControlableObjectSpecificFocus(this);
+    }
+
+    #region Animation
+    private void CanMoveAnimation()
+    {
+        _canMoveAnimation = true;
+    }
+
+    private void CantMoveAnimation()
+    {
+        _canMoveAnimation = false;
+    }
+
+    private void PlayWalkSound()
+    {
+        int index = Random.Range(0, _walkSounds.Length);
+        AudioManager.Instance.PlaySoundAt(_walkSounds[index], transform);
+    }
+
+    private void PlayEatSound()
+    {
+        AudioManager.Instance.PlaySoundAt(_eatSound, transform);
+    }
+
+    private void PlayDeathSound()
+    {
+        AudioManager.Instance.PlaySoundAt(_deathSound, transform);
+    }
+
+    #endregion
+
+    void OnChangeFocus()
+    {
+        GameManager.Instance.ChangeControlableObjectFocus();
+    }
+
+    public void EnableController()
+    {
+        _playerInput.ActivateInput();
+    }
+
+    public void DisableController()
+    {
+        _playerInput.DeactivateInput();
+    }
+
+    public Transform GetTransform()
+    {
+        return this.transform;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Buff")
+        {
+            Buff buff = other.GetComponentInParent<Buff>();
+            this.transform.localScale = new Vector3(this.transform.localScale.x + buff.Size, this.transform.localScale.y + buff.Size, this.transform.localScale.z + buff.Size);
+            Destroy(buff.gameObject);
+        }
     }
 }
