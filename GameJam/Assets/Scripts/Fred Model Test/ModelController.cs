@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class ModelController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 0.0f;
+    [SerializeField] private float _impulseStrength = 0.0f;
 
     [SerializeField] private SkinnedMeshRenderer _leftEye;
     [SerializeField] private SkinnedMeshRenderer _rightEye;
@@ -13,6 +13,8 @@ public class ModelController : MonoBehaviour
 
     [SerializeField] private GameObject _eye;
     [SerializeField] private GameObject _arm;
+
+    [SerializeField] private Buff _buff;
 
     private Rigidbody _rigidBody;
     private float _movementX;
@@ -60,32 +62,32 @@ public class ModelController : MonoBehaviour
         {
             _leftEye.enabled = false;
             _playerInput.enabled = false;
-            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.x < 0.0f)
         {
             _rightEye.enabled = false;
             _playerInput.enabled = false;
-            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y > 0.0f)
         {
             _leftArm.enabled = false;
             _playerInput.enabled = false;
-            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
         }
         if (inputVector.y < 0.0f)
         {
             _rightArm.enabled = false;
             _playerInput.enabled = false;
-            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2.0f), Quaternion.identity);
         }
     }
 
     private void Movement()
     {
         Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
-        _rigidBody.AddForce(movement * _speed);
+        _rigidBody.AddForce(movement * _impulseStrength);
     }
 
     private void Rotation()
@@ -121,7 +123,10 @@ public class ModelController : MonoBehaviour
     {
         _canMoveAnimation = false;
     }
-
-
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.transform.position);
+    }
 }

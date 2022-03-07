@@ -95,13 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144146838bfe86c4b9bb6da19464a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 50
+  _impulseStrength: 75
   _leftEye: {fileID: 6725642310735462622}
   _rightEye: {fileID: 6238991138216553258}
   _leftArm: {fileID: 2455385551427324719}
   _rightArm: {fileID: 8188672154923971065}
   _eye: {fileID: 4820984735285996601, guid: 34b53367c45029647bf71eeea1ff4f77, type: 3}
   _arm: {fileID: 2775709439743688300, guid: 3cadd1e60b84b7b4096d0166fb0cc5fa, type: 3}
+  _buff: {fileID: 0}
 --- !u!135 &2155500739320202001
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &781952682
 Animator:
   serializedVersion: 3
