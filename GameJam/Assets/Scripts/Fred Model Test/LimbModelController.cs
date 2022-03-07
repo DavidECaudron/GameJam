@@ -8,12 +8,13 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rigidBody;
+    [SerializeField] private ModelController _modelController;
+    [SerializeField] private float _impulseStrength = 0.0f;
 
     private float _movementX;
     private float _movementY;
 
     private bool _isFusionnable = false;
-    private string _targetTag = null;
 
     private bool _canMoveAnimation;
 
@@ -48,10 +49,11 @@ public class LimbModelController : MonoBehaviour, IControlableObject
 
     private void OnFusion()
     {
-        if (_isFusionnable && _targetTag == "Player")
+        if (_isFusionnable)
         {
             FindObjectOfType<ModelController>().ModelReset();
             GameManager.Instance.RemoveControlableObject(this);
+            _modelController.ModelReset();
             Destroy(this.gameObject);
         }
     }
@@ -59,7 +61,7 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     private void Movement()
     {
         Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
-        _rigidBody.AddForce(movement * _speed);
+        _rigidBody.AddForce(movement * _impulseStrength);
     }
 
     private void Rotation()
@@ -78,13 +80,14 @@ public class LimbModelController : MonoBehaviour, IControlableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        _targetTag = other.tag;
-        _isFusionnable = true;
+        if (other.tag == "Player")
+        {
+            _isFusionnable = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _targetTag = null;
         _isFusionnable = false;
     }
 
