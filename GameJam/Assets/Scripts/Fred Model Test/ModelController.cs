@@ -18,6 +18,8 @@ public class ModelController : MonoBehaviour, IControlableObject
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
 
+    private Buff _buff;
+
     private float _movementX;
     private float _movementY;
     private bool _canMoveAnimation;
@@ -138,5 +140,15 @@ public class ModelController : MonoBehaviour, IControlableObject
     public Transform GetTransform()
     {
         return this.transform;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Buff")
+        {
+            _buff = other.GetComponentInParent<Buff>();
+            this.transform.localScale = new Vector3(this.transform.localScale.x + _buff.Size, this.transform.localScale.y + _buff.Size, this.transform.localScale.z + _buff.Size);
+            Destroy(_buff.gameObject);
+        }
     }
 }

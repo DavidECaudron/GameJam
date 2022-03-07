@@ -31,18 +31,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private float remainingTime = 2f;
-    private void Update()
-    {
-        remainingTime -= Time.deltaTime;
-
-        if (remainingTime <= 0f)
-        {
-            remainingTime = float.MaxValue;
-            SetupScene();
-        }
-    }
-
     private void Awake()
     {
         if (Instance != null)
