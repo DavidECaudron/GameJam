@@ -6,7 +6,6 @@ public enum DoorOpenerType
     Slab = 1
 }
 
-
 [RequireComponent(typeof(Animator))]
 public class DoorOpener : MonoBehaviour
 {
