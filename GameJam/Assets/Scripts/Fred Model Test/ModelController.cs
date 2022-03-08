@@ -26,6 +26,7 @@ public class ModelController : MonoBehaviour, IControlableObject
     private float _movementX;
     private float _movementY;
     private bool _canMoveAnimation;
+
     public bool Alive;
     public bool CanMove;
 
@@ -37,8 +38,7 @@ public class ModelController : MonoBehaviour, IControlableObject
         _animator.SetBool("Move", condition);
 
         if (!_canMoveAnimation)
-        {
-            
+        {            
             _rigidBody.velocity = new Vector3(0f, _rigidBody.velocity.y, 0f); ;
             _rigidBody.angularVelocity = new Vector3(0f, _rigidBody.angularVelocity.y, 0f); ;
             return;
@@ -59,26 +59,26 @@ public class ModelController : MonoBehaviour, IControlableObject
         Vector2 inputVector = inputValue.Get<Vector2>();
         DisableController();
 
-        if (inputVector.x > 0.0f && _leftEye.enabled == true)
+        if (inputVector.x > 0.0f && _leftEye.enabled)
         {
             _leftEye.enabled = false;
             _eye.GetComponent<LimbModelController>().EnumLimb = EnumLimb.LeftEye;
             Instantiate(_eye, new Vector3(_leftEye.transform.position.x, _leftEye.transform.position.y + 3.0f, _leftEye.transform.position.z), Quaternion.identity);
         }
-        if (inputVector.x < 0.0f && _rightEye.enabled == true)
+        if (inputVector.x < 0.0f && _rightEye.enabled)
         {
             _rightEye.enabled = false;
             _eye.GetComponent<LimbModelController>().EnumLimb = EnumLimb.RightEye;
             Instantiate(_eye, new Vector3(_rightEye.transform.position.x, _rightEye.transform.position.y + 3.0f, _rightEye.transform.position.z), Quaternion.identity);
         }
 
-        if (inputVector.y > 0.0f && _leftArm.enabled == true)
+        if (inputVector.y > 0.0f && _leftArm.enabled)
         {
             _leftArm.enabled = false;
             _arm.GetComponent<LimbModelController>().EnumLimb = EnumLimb.LeftArm;
             Instantiate(_arm, new Vector3(_leftArm.transform.position.x, _leftArm.transform.position.y + 3.0f, _leftArm.transform.position.z + 0.75f), Quaternion.identity);
         }
-        if (inputVector.y < 0.0f && _rightArm.enabled == true)
+        if (inputVector.y < 0.0f && _rightArm.enabled)
         {
             _rightArm.enabled = false;
             _arm.GetComponent<LimbModelController>().EnumLimb = EnumLimb.RightArm;
@@ -187,5 +187,7 @@ public class ModelController : MonoBehaviour, IControlableObject
         Alive = false;
         //PlayDeathSound();
         //Jouer animation mort
+
+        GameManager.Instance.RealoadCurrentScene();
     }
 }
