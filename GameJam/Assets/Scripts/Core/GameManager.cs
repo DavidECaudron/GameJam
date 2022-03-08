@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int sceneIndex)
     {
+        StopAllCoroutines();
         StartCoroutine(LoadSceneWithIndex(sceneIndex));
     }
 
