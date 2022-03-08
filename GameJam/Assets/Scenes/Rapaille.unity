@@ -520,7 +520,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -983,7 +983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4450597770908064002, guid: 83ca350f3212a79469857e3a802d76e7, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4450597770908064003, guid: 83ca350f3212a79469857e3a802d76e7, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1072,7 +1072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3827652324618203221, guid: 826a660c9da9168449533978eea3235f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40.9
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 3827652324618203221, guid: 826a660c9da9168449533978eea3235f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1080,7 +1080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3827652324618203221, guid: 826a660c9da9168449533978eea3235f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -71.3
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 3827652324618203221, guid: 826a660c9da9168449533978eea3235f, type: 3}
       propertyPath: m_LocalRotation.w
