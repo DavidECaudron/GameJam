@@ -135,30 +135,6 @@ public class ModelController : MonoBehaviour, IControlableObject
         }
 
         EnableController();
-
-        /*
-        switch (enumLimb)
-        {
-            case EnumLimb.LeftEye:
-                _leftEye.enabled = true;
-                _playerInput.enabled = true;
-                break;
-            case EnumLimb.RightEye:
-                _rightEye.enabled = true;
-                _playerInput.enabled = true;
-                break;
-            case EnumLimb.LeftArm:
-                _leftArm.enabled = true;
-                _playerInput.enabled = true;
-                break;
-            case EnumLimb.RightArm:
-                _rightArm.enabled = true;
-                _playerInput.enabled = true;
-                break;
-            default:
-                break;
-        }
-        */
         GameManager.Instance.ChangeControlableObjectSpecificFocus(this);
     }
 

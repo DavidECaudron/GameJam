@@ -135,11 +135,11 @@ public class GameManager : MonoBehaviour
 
     public void ChangeControlableObjectSpecificFocus(IControlableObject target)
     {
-        if(_controlableObjectIndex < _controlableObject.Count)
+        if (_controlableObjectIndex < _controlableObject.Count)
         {
             _controlableObject[_controlableObjectIndex].DisableController();
         }
-        
+
         _controlableObjectIndex = _controlableObject.IndexOf(target);
         target.EnableController();
 

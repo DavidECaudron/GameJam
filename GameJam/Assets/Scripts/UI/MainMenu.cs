@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
     public void ResumeGame()
     {
         //SaveData save = SaveManager.Instance.GetSaveData();
-
         GameManager.Instance.LoadScene(_level1Index);
     }
 
