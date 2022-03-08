@@ -7,4 +7,5 @@ public class LevelData : MonoBehaviour
     public Transform EnemySpawnPosition;
     public Transform PlayerSpawnPosition;
     [Min(1f)] public float PlayerStartScaleSize;
+    public readonly int NextLevelIndex;
 }

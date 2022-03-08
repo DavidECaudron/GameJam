@@ -27,10 +27,12 @@ public class ModelController : MonoBehaviour, IControlableObject
     private float _movementY;
     private bool _canMoveAnimation;
     public bool Alive;
+    public bool CanMove;
 
     private void Start()
     {
         Alive = true;
+        CanMove = true;
         GameManager.Instance.AddControlableObject(this);
     }
 
@@ -38,6 +40,8 @@ public class ModelController : MonoBehaviour, IControlableObject
     {
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
         _animator.SetBool("Move", condition);
+
+        if (!CanMove) return;
 
         if (!_canMoveAnimation)
         {

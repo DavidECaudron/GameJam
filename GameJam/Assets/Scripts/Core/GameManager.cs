@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
 
         _playerObject = Instantiate(_playerPrefab, levelData.PlayerSpawnPosition.position, levelData.PlayerSpawnPosition.rotation);
         _playerObject.transform.localScale = new Vector3(levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize);
+
+        _playerObject.GetComponent<ModelController>().CanMove = true;
+
         FollowCam.Instance.ChangeTarget(_playerObject.transform);
         StartCoroutine(SpawnEnemy(levelData.SpawnEnemyTime, levelData.EnemySpawnPosition));
     }
