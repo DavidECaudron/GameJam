@@ -129,7 +129,7 @@ MonoBehaviour:
   _playerInput: {fileID: 3933774920532386791}
   _animator: {fileID: 5789610496627833616}
   _rigidBody: {fileID: 1628963323}
-  _modelController: {fileID: 0}
+  EnumLimb: 0
 --- !u!95 &5789610496627833616
 Animator:
   serializedVersion: 3
@@ -161,7 +161,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &8202837605474205284
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -63,25 +63,30 @@ public class ModelController : MonoBehaviour, IControlableObject
     {
         Vector2 inputVector = inputValue.Get<Vector2>();
 
-        if (inputVector.x > 0.0f)
+        if (inputVector.x > 0.0f && _leftEye.enabled == true)
         {
             _leftEye.enabled = false;
-            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            _eye.GetComponent<LimbModelController>().EnumLimb = EnumLimb.LeftEye;
+            Instantiate(_eye, new Vector3(_leftEye.transform.position.x, _leftEye.transform.position.y + 3.0f, _leftEye.transform.position.z), Quaternion.identity);
         }
-        if (inputVector.x < 0.0f)
+        if (inputVector.x < 0.0f && _rightEye.enabled == true)
         {
             _rightEye.enabled = false;
-            Instantiate(_eye, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            _eye.GetComponent<LimbModelController>().EnumLimb = EnumLimb.RightEye;
+            Instantiate(_eye, new Vector3(_rightEye.transform.position.x, _rightEye.transform.position.y + 3.0f, _rightEye.transform.position.z), Quaternion.identity);
         }
-        if (inputVector.y > 0.0f)
+
+        if (inputVector.y > 0.0f && _leftArm.enabled == true)
         {
             _leftArm.enabled = false;
-            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            _arm.GetComponent<LimbModelController>().EnumLimb = EnumLimb.LeftArm;
+            Instantiate(_arm, new Vector3(_leftArm.transform.position.x, _leftArm.transform.position.y + 3.0f, _leftArm.transform.position.z + 0.75f), Quaternion.identity);
         }
-        if (inputVector.y < 0.0f)
+        if (inputVector.y < 0.0f && _rightArm.enabled == true)
         {
             _rightArm.enabled = false;
-            Instantiate(_arm, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z + 2.0f), Quaternion.identity);
+            _arm.GetComponent<LimbModelController>().EnumLimb = EnumLimb.RightArm;
+            Instantiate(_arm, new Vector3(_rightArm.transform.position.x, _rightArm.transform.position.y + 3.0f, _rightArm.transform.position.z + 0.75f), Quaternion.identity);
         }
     }
 
@@ -105,29 +110,51 @@ public class ModelController : MonoBehaviour, IControlableObject
         }
     }
 
-    public void ModelReset(string tag)
+    public void ModelReset(EnumLimb enumLimb)
     {
-        switch (tag)
+
+        if (enumLimb == EnumLimb.LeftEye)
         {
-            case "leftArm":
-                _leftArm.enabled = true;
-                _playerInput.enabled = true;
-                break;
-            case "rightArm":
-                _rightArm.enabled = true;
-                _playerInput.enabled = true;
-                break;
-            case "leftEye":
+            _leftEye.enabled = true;
+        }
+        if (enumLimb == EnumLimb.RightEye)
+        {
+            _rightEye.enabled = true;
+        }
+        if (enumLimb == EnumLimb.LeftArm)
+        {
+            _leftArm.enabled = true;
+        }
+        if (enumLimb == EnumLimb.RightArm)
+        {
+            _rightArm.enabled = true;
+        }
+
+        EnableController();
+
+        /*
+        switch (enumLimb)
+        {
+            case EnumLimb.LeftEye:
                 _leftEye.enabled = true;
                 _playerInput.enabled = true;
                 break;
-            case "rightEye":
+            case EnumLimb.RightEye:
                 _rightEye.enabled = true;
+                _playerInput.enabled = true;
+                break;
+            case EnumLimb.LeftArm:
+                _leftArm.enabled = true;
+                _playerInput.enabled = true;
+                break;
+            case EnumLimb.RightArm:
+                _rightArm.enabled = true;
                 _playerInput.enabled = true;
                 break;
             default:
                 break;
         }
+        */
         GameManager.Instance.ChangeControlableObjectSpecificFocus(this);
     }
 
