@@ -34,7 +34,7 @@ public class ModelController : MonoBehaviour, IControlableObject
         if (!CanMove) return;
 
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
-        _animator.SetBool("Move", condition);        
+        _animator.SetBool("Move", condition);
 
         if (!_canMoveAnimation)
         {

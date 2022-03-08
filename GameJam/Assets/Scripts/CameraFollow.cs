@@ -21,6 +21,11 @@ public class CameraFollow : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        _target = FindObjectOfType<ModelController>().gameObject.transform;
+    }
+
     private void LateUpdate()
     {
         if (_target == null) return;
