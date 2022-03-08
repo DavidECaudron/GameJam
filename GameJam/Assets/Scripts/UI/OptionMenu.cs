@@ -35,6 +35,8 @@ public class OptionMenu : MonoBehaviour
 
     private void SetupGamepadImage()
     {
+        if (Gamepad.current == null) return;
+
         switch (Gamepad.current.displayName)
         {
             case "Playstation Controller":
