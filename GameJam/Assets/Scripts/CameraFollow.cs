@@ -22,14 +22,6 @@ public class CameraFollow : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        if (_forceTargetForDebug)
-        {
-            _target = FindObjectOfType<ModelController>()?.transform;
-        }
-    }
-
     private void LateUpdate()
     {
         if (_target == null) return;
