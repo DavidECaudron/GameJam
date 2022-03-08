@@ -197,7 +197,10 @@ MonoBehaviour:
   _rigidBody: {fileID: 6082321191927501872}
   _playerInput: {fileID: 6082321191927501875}
   _animator: {fileID: 6082321191927501901}
-  _walkSounds: []
+  _walkSounds:
+  - {fileID: 8300000, guid: dd9c0b566ca927145a5c387d3f3b446f, type: 3}
+  - {fileID: 8300000, guid: 78dc22ae8f701514e8cb72e012cde519, type: 3}
+  - {fileID: 8300000, guid: 22cfebf314738d54e9f479f734c46a00, type: 3}
   _eatSound: {fileID: 0}
   _deathSound: {fileID: 0}
   Alive: 1

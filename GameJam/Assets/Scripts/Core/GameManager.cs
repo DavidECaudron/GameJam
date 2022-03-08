@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour
         _playerObject = Instantiate(_playerPrefab, levelData.PlayerSpawnPosition.position, levelData.PlayerSpawnPosition.rotation);
         _playerObject.transform.localScale = new Vector3(levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize);
 
-        //FollowCam.Instance.ChangeTarget(_playerObject.transform);
         CameraFollow.Instance.ChangeTarget(_playerObject.transform);
         StartCoroutine(SpawnEnemy(levelData.SpawnEnemyTime, levelData.EnemySpawnPosition));
+        AudioManager.Instance.StartAmbianceSound();
     }
 
     private IEnumerator SpawnEnemy(float waitingTime, Transform trsf)
@@ -148,7 +148,6 @@ public class GameManager : MonoBehaviour
         _controlableObjectIndex = _controlableObject.IndexOf(target);
         target.EnableController();
 
-        //FollowCam.Instance.ChangeTarget(target.GetTransform());
         CameraFollow.Instance.ChangeTarget(target.GetTransform());
     }
 
@@ -162,7 +161,6 @@ public class GameManager : MonoBehaviour
         IControlableObject controlableObject = _controlableObject[_controlableObjectIndex];
         controlableObject.EnableController();
 
-        //FollowCam.Instance.ChangeTarget(controlableObject.GetTransform());
         CameraFollow.Instance.ChangeTarget(controlableObject.GetTransform());
     }
 

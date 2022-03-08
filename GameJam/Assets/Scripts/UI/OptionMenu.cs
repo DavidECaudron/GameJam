@@ -6,6 +6,7 @@ public class OptionMenu : MonoBehaviour
 {
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _soundEffectSlider;
+    [SerializeField] private Slider _ambianceSlider;
 
     [SerializeField] private float _sliderMinValue;
     [SerializeField] private float _sliderMaxValue;
@@ -22,8 +23,12 @@ public class OptionMenu : MonoBehaviour
         _soundEffectSlider.minValue = _sliderMinValue;
         _soundEffectSlider.maxValue = _sliderMaxValue;
 
+        _ambianceSlider.minValue = _sliderMinValue;
+        _ambianceSlider.maxValue = _sliderMaxValue;
+
         _musicSlider.value = AudioManager.Instance.GetMusicVolume();
         _soundEffectSlider.value = AudioManager.Instance.GetSoundEffectVolume();
+        _ambianceSlider.value = AudioManager.Instance.GetAmbianceVolume();
 
         SetupGamepadImage();
     }
@@ -54,6 +59,11 @@ public class OptionMenu : MonoBehaviour
     public void MusicVolumeChanged(float value)
     {
         AudioManager.Instance.MusicVolumeChanged(value);
+    }
+
+    public void AmbianceVolumeChanged(float value)
+    {
+        AudioManager.Instance.AmbianceVolumeChanged(value);
     }
 
     public void CloseMenu()

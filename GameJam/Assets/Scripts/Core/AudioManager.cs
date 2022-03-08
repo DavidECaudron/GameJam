@@ -8,13 +8,19 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioMixerGroup _musicMixer;
     [SerializeField] private AudioMixerGroup _soundEffectMixer;
+    [SerializeField] private AudioMixerGroup _ambianceMixer;
     [SerializeField] private string _musicVolumeParameterName;
     [SerializeField] private string _soundEffectVolumeParameterName;
+    [SerializeField] private string _ambiancetVolumeParameterName;
 
     [SerializeField] private AudioClip[] _musics;
     [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioClip[] _ambiances;
+    [SerializeField] private AudioSource _ambianceSource;
 
+    private bool _ambianceStarted;
     private int _musicIndex;
+    private int _ambianceIndex;
 
     private void Awake()
     {
@@ -33,6 +39,31 @@ public class AudioManager : MonoBehaviour
     {
         _musicIndex = 0;
         StartMusic();
+    }
+
+    public void StartAmbianceSound()
+    {
+        if (_ambianceStarted) return;
+        _ambianceStarted = true;
+
+        AudioClip clip = _ambiances[_musicIndex];
+        _ambianceSource.clip = clip;
+        _ambianceSource.Play();
+
+        StartCoroutine(PlayNextAmbiance(clip.length + 1));
+    }
+
+    private IEnumerator PlayNextAmbiance(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _ambianceIndex++;
+        _ambianceIndex %= _ambiances.Length;
+
+        AudioClip clip = _ambiances[_musicIndex];
+        _ambianceSource.clip = clip;
+        _ambianceSource.Play();
+
+        StartCoroutine(PlayNextAmbiance(clip.length + 1));
     }
 
     private void StartMusic()
@@ -67,6 +98,11 @@ public class AudioManager : MonoBehaviour
         _musicMixer.audioMixer.SetFloat(_musicVolumeParameterName, value);
     }
 
+    public void AmbianceVolumeChanged(float value)
+    {
+        _ambianceMixer.audioMixer.SetFloat(_ambiancetVolumeParameterName, value);
+    }
+
     public float GetMusicVolume()
     {
         float value;
@@ -78,6 +114,13 @@ public class AudioManager : MonoBehaviour
     {
         float value;
         _soundEffectMixer.audioMixer.GetFloat(_soundEffectVolumeParameterName, out value);
+        return value;
+    }
+
+    public float GetAmbianceVolume()
+    {
+        float value;
+        _ambianceMixer.audioMixer.GetFloat(_ambiancetVolumeParameterName, out value);
         return value;
     }
 
