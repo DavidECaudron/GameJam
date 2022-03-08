@@ -8,7 +8,9 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rigidBody;
-    
+
+    [HideInInspector] public EnumLimb EnumLimb;
+
     private ModelController _modelController;
 
     private float _movementX;
@@ -53,7 +55,7 @@ public class LimbModelController : MonoBehaviour, IControlableObject
         {
             GameManager.Instance.RemoveControlableObject(this);
             Destroy(this.gameObject);
-            _modelController.ModelReset(this.tag);
+            _modelController.ModelReset(EnumLimb);
         }
     }
 
