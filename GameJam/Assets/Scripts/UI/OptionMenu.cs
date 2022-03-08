@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class OptionMenu : MonoBehaviour
@@ -8,6 +9,10 @@ public class OptionMenu : MonoBehaviour
 
     [SerializeField] private float _sliderMinValue;
     [SerializeField] private float _sliderMaxValue;
+
+    [SerializeField] private Image _ps5Image;
+    [SerializeField] private Image _xboxImage;
+    [SerializeField] private Image _switchImage;
 
     private void Start()
     {
@@ -19,6 +24,26 @@ public class OptionMenu : MonoBehaviour
 
         _musicSlider.value = AudioManager.Instance.GetMusicVolume();
         _soundEffectSlider.value = AudioManager.Instance.GetSoundEffectVolume();
+
+        SetupGamepadImage();
+    }
+
+    private void SetupGamepadImage()
+    {
+        switch (Gamepad.current.displayName)
+        {
+            case "Playstation Controller":
+                _ps5Image.gameObject.SetActive(true);
+                break;
+
+            case "Xbox Controller":
+                _xboxImage.gameObject.SetActive(true);
+                break;
+
+            case "":
+                _switchImage.gameObject.SetActive(true);
+                break;
+        }
     }
 
     public void SoundEffectVolumeChanged(float value)
