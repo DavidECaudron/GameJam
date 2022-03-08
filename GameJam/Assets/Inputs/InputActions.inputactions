@@ -355,9 +355,31 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "up",
+                    "id": "54313637-2593-477a-863a-bdb9ae629a54",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SplitModel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "down",
                     "id": "06e720e7-9549-4494-930e-66a9f2293369",
                     "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SplitModel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "633321ab-65c1-467c-a04b-b5f2774322c5",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -377,9 +399,31 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "left",
+                    "id": "301ee978-6dc9-4990-8980-45ef2dd4a6a7",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SplitModel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "right",
                     "id": "6682234f-b3ea-4634-b374-cd2c9302e23d",
                     "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SplitModel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "9ed45c9e-3a78-4372-8534-430287fa273c",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
