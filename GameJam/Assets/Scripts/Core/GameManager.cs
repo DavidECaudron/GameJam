@@ -61,8 +61,6 @@ public class GameManager : MonoBehaviour
         _playerObject = Instantiate(_playerPrefab, levelData.PlayerSpawnPosition.position, levelData.PlayerSpawnPosition.rotation);
         _playerObject.transform.localScale = new Vector3(levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize);
 
-        _playerObject.GetComponent<ModelController>().CanMove = true;
-
         FollowCam.Instance.ChangeTarget(_playerObject.transform);
         StartCoroutine(SpawnEnemy(levelData.SpawnEnemyTime, levelData.EnemySpawnPosition));
     }
@@ -91,12 +89,17 @@ public class GameManager : MonoBehaviour
         }
         #endregion
 
-        StopAllCoroutines();
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!asyncOperation.isDone)
         {
             yield return new WaitForSeconds(.1f);
+        }
+
+        if (!OnMainMenu())
+        {
+            SetupScene();
+            yield return new WaitForSeconds(.5f);
         }
 
         #region Fade Out
@@ -111,10 +114,9 @@ public class GameManager : MonoBehaviour
 
         _controlableObject.Clear();
         GamePaused = false;
-
         if (!OnMainMenu())
         {
-            SetupScene();
+            _playerObject.GetComponent<ModelController>().CanMove = true;
         }
 
         yield return null;
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ChangeControlableObjectSpecificFocus(IControlableObject target)
-    {        
+    {
         _controlableObject[_controlableObjectIndex].DisableController();
         _controlableObjectIndex = _controlableObject.IndexOf(target);
         target.EnableController();
