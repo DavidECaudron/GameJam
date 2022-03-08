@@ -11,6 +11,9 @@ public class DoorOpener : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private DoorOpenerType OpenerType;
+    [SerializeField] private bool _needMinimumSizeForUse;
+    [SerializeField] private float _minSize;
+
     private bool _uniqueUtilisation;
     private bool _doorIsOpen;
 
@@ -43,6 +46,11 @@ public class DoorOpener : MonoBehaviour
         if (_doorIsOpen || _uniqueUtilisation) return;
         if (other.tag == "Player")
         {
+            if (_needMinimumSizeForUse)
+            {
+                if (other.transform.localScale.y < _minSize) return;
+            }
+
             EnableOpener();
         }
     }
