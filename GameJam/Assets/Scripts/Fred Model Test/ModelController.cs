@@ -29,12 +29,6 @@ public class ModelController : MonoBehaviour, IControlableObject
     public bool Alive;
     public bool CanMove;
 
-    private void Start()
-    {
-        Alive = true;
-        GameManager.Instance.AddControlableObject(this);
-    }
-
     private void FixedUpdate()
     {
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
@@ -62,20 +56,19 @@ public class ModelController : MonoBehaviour, IControlableObject
     private void OnSplitModel(InputValue inputValue)
     {
         Vector2 inputVector = inputValue.Get<Vector2>();
+        DisableController();
 
         if (inputVector.x > 0.0f && _leftEye.enabled == true)
         {
             _leftEye.enabled = false;
             _eye.GetComponent<LimbModelController>().EnumLimb = EnumLimb.LeftEye;
             Instantiate(_eye, new Vector3(_leftEye.transform.position.x, _leftEye.transform.position.y + 3.0f, _leftEye.transform.position.z), Quaternion.identity);
-            DisableController();
         }
         if (inputVector.x < 0.0f && _rightEye.enabled == true)
         {
             _rightEye.enabled = false;
             _eye.GetComponent<LimbModelController>().EnumLimb = EnumLimb.RightEye;
             Instantiate(_eye, new Vector3(_rightEye.transform.position.x, _rightEye.transform.position.y + 3.0f, _rightEye.transform.position.z), Quaternion.identity);
-            DisableController();
         }
 
         if (inputVector.y > 0.0f && _leftArm.enabled == true)
@@ -83,14 +76,12 @@ public class ModelController : MonoBehaviour, IControlableObject
             _leftArm.enabled = false;
             _arm.GetComponent<LimbModelController>().EnumLimb = EnumLimb.LeftArm;
             Instantiate(_arm, new Vector3(_leftArm.transform.position.x, _leftArm.transform.position.y + 3.0f, _leftArm.transform.position.z + 0.75f), Quaternion.identity);
-            DisableController();
         }
         if (inputVector.y < 0.0f && _rightArm.enabled == true)
         {
             _rightArm.enabled = false;
             _arm.GetComponent<LimbModelController>().EnumLimb = EnumLimb.RightArm;
             Instantiate(_arm, new Vector3(_rightArm.transform.position.x, _rightArm.transform.position.y + 3.0f, _rightArm.transform.position.z + 0.75f), Quaternion.identity);
-            DisableController();
         }
     }
 
@@ -174,12 +165,14 @@ public class ModelController : MonoBehaviour, IControlableObject
 
     public void EnableController()
     {
-        _playerInput.ActivateInput();
+        _playerInput.enabled = true;
+       // _playerInput.ActivateInput();        
     }
 
     public void DisableController()
     {
-        _playerInput.DeactivateInput();
+        _playerInput.enabled = false;
+        //_playerInput.DeactivateInput();
     }
 
     public Transform GetTransform()

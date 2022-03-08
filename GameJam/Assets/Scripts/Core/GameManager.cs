@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private int _controlableObjectIndex;
     public static GameManager Instance;
 
-    private List<IControlableObject> _controlableObject = new List<IControlableObject>();
+    private List<IControlableObject> _controlableObject;
 
     public bool GamePaused
     {
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        _controlableObject = new List<IControlableObject>();
         DontDestroyOnLoad(gameObject);
         Instance = this;
     }
@@ -61,7 +62,8 @@ public class GameManager : MonoBehaviour
         _playerObject = Instantiate(_playerPrefab, levelData.PlayerSpawnPosition.position, levelData.PlayerSpawnPosition.rotation);
         _playerObject.transform.localScale = new Vector3(levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize, levelData.PlayerStartScaleSize);
 
-        FollowCam.Instance.ChangeTarget(_playerObject.transform);
+        //FollowCam.Instance.ChangeTarget(_playerObject.transform);
+        CameraFollow.Instance.ChangeTarget(_playerObject.transform);
         StartCoroutine(SpawnEnemy(levelData.SpawnEnemyTime, levelData.EnemySpawnPosition));
     }
 
@@ -117,7 +119,10 @@ public class GameManager : MonoBehaviour
         GamePaused = false;
         if (!OnMainMenu())
         {
-            _playerObject.GetComponent<ModelController>().CanMove = true;
+            ModelController model = _playerObject.GetComponent<ModelController>();
+            model.CanMove = true;
+            model.Alive = true;
+            AddControlableObject(model);
         }
 
         yield return null;
@@ -143,18 +148,22 @@ public class GameManager : MonoBehaviour
         _controlableObjectIndex = _controlableObject.IndexOf(target);
         target.EnableController();
 
-        FollowCam.Instance.ChangeTarget(target.GetTransform());
+        //FollowCam.Instance.ChangeTarget(target.GetTransform());
+        CameraFollow.Instance.ChangeTarget(target.GetTransform());
     }
 
     public void ChangeControlableObjectFocus()
     {
+        if (_controlableObject.Count <= 1) return;
+
         _controlableObject[_controlableObjectIndex].DisableController();
         _controlableObjectIndex++;
         _controlableObjectIndex %= _controlableObject.Count;
         IControlableObject controlableObject = _controlableObject[_controlableObjectIndex];
         controlableObject.EnableController();
 
-        FollowCam.Instance.ChangeTarget(controlableObject.GetTransform());
+        //FollowCam.Instance.ChangeTarget(controlableObject.GetTransform());
+        CameraFollow.Instance.ChangeTarget(controlableObject.GetTransform());
     }
 
 }

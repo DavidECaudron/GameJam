@@ -113,12 +113,14 @@ public class LimbModelController : MonoBehaviour, IControlableObject
 
     public void EnableController()
     {
-        _playerInput.ActivateInput();
+        _playerInput.enabled = true;
+       // _playerInput.ActivateInput();
     }
 
     public void DisableController()
     {
-        _playerInput.DeactivateInput();
+        _playerInput.enabled = false;
+        //_playerInput.DeactivateInput();
     }
 
     public Transform GetTransform()
