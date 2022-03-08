@@ -106,14 +106,29 @@ public class ModelController : MonoBehaviour, IControlableObject
         }
     }
 
-    public void ModelReset()
+    public void ModelReset(string tag)
     {
-        _leftEye.enabled = true;
-        _rightEye.enabled = true;
-        _leftArm.enabled = true;
-        _rightArm.enabled = true;
-        _playerInput.enabled = true;
-
+        switch (tag)
+        {
+            case "leftArm":
+                _leftArm.enabled = true;
+                _playerInput.enabled = true;
+                break;
+            case "rightArm":
+                _rightArm.enabled = true;
+                _playerInput.enabled = true;
+                break;
+            case "leftEye":
+                _leftEye.enabled = true;
+                _playerInput.enabled = true;
+                break;
+            case "rightEye":
+                _rightEye.enabled = true;
+                _playerInput.enabled = true;
+                break;
+            default:
+                break;
+        }
         GameManager.Instance.ChangeControlableObjectSpecificFocus(this);
     }
 

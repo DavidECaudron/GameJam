@@ -8,7 +8,8 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rigidBody;
-    [SerializeField] private ModelController _modelController;
+    
+    private ModelController _modelController;
 
     private float _movementX;
     private float _movementY;
@@ -50,10 +51,9 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     {
         if (_isFusionnable)
         {
-            FindObjectOfType<ModelController>().ModelReset();
             GameManager.Instance.RemoveControlableObject(this);
-            _modelController.ModelReset();
             Destroy(this.gameObject);
+            _modelController.ModelReset(this.tag);
         }
     }
 
@@ -82,6 +82,7 @@ public class LimbModelController : MonoBehaviour, IControlableObject
         if (other.tag == "Player")
         {
             _isFusionnable = true;
+            _modelController = other.GetComponentInParent<ModelController>();
         }
     }
 
