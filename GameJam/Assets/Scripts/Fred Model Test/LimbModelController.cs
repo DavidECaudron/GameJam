@@ -17,7 +17,6 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     private float _movementY;
 
     private bool _isFusionnable = false;
-
     private bool _canMoveAnimation;
 
     private void Start()
