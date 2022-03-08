@@ -32,7 +32,6 @@ public class ModelController : MonoBehaviour, IControlableObject
     private void Start()
     {
         Alive = true;
-        CanMove = true;
         GameManager.Instance.AddControlableObject(this);
     }
 
