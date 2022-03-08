@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -10,6 +11,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private string _musicVolumeParameterName;
     [SerializeField] private string _soundEffectVolumeParameterName;
 
+    [SerializeField] private AudioClip[] _musics;
+    [SerializeField] private AudioSource _musicSource;
+
+    private int _musicIndex;
+
     private void Awake()
     {
         if (Instance != null)
@@ -21,6 +27,34 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         Instance = this;
+    }
+
+    private void Start()
+    {
+        _musicIndex = 0;
+        StartMusic();
+    }
+
+    private void StartMusic()
+    {
+        AudioClip clip = _musics[_musicIndex];
+        _musicSource.clip = clip;
+        _musicSource.Play();
+
+        StartCoroutine(PlayNextMusic(clip.length + 1));
+    }
+
+    private IEnumerator PlayNextMusic(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _musicIndex++;
+        _musicIndex %= _musics.Length;
+
+        AudioClip clip = _musics[_musicIndex];
+        _musicSource.clip = clip;
+        _musicSource.Play();
+
+        StartCoroutine(PlayNextMusic(clip.length + 1));
     }
 
     public void SoundEffectVolumeChanged(float value)
