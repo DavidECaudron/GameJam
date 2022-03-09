@@ -10,6 +10,7 @@ public class ChasingTrigger : MonoBehaviour
         if (_followTarget.OnChasing()) return;
 
         ModelController model = other.GetComponent<ModelController>();
+        if (model == null) return;
         if (!model.Alive) return;
 
         _followTarget.StartChasing(other.transform);

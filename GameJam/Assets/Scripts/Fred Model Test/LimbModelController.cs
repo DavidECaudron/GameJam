@@ -60,7 +60,7 @@ public class LimbModelController : MonoBehaviour, IControlableObject
 
     private void Movement()
     {
-        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
+        Vector3 movement = new Vector3(-_movementX, 0.0f, -_movementY);
         _rigidBody.AddForce(movement * _impulseStrength);
     }
 
