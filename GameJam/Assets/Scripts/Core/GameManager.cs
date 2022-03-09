@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         #endregion
-
+        StopCoroutine(nameof(SpawnEnemy));
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!asyncOperation.isDone)

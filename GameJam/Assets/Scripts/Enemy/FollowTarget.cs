@@ -26,7 +26,14 @@ public class FollowTarget : MonoBehaviour
                 gameObject.SetActive(false);
                 return;
             }
-        }        
+        }
+
+        if (!_agent.isOnNavMesh)
+        {
+            Debug.LogError("No navmesh set, need to bake terrain");
+            gameObject.SetActive(false);
+            return;
+        }
 
         _pathTargetPosition = _path.GetFirstPosition();
         _agent.SetDestination(_pathTargetPosition);

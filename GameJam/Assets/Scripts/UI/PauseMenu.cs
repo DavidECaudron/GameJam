@@ -21,6 +21,12 @@ public class PauseMenu : MonoBehaviour
         UIManager.Instance.TogglePauseMenu();
     }
 
+    public void ReloadLevel()
+    {
+        GameManager.Instance.RealoadCurrentScene();
+        UIManager.Instance.TogglePauseMenu();
+    }
+
     public bool GetOptionMenuWasVisible()
     {
         return _optionMenu.activeInHierarchy;

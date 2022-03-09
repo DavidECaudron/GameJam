@@ -987,30 +987,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 6776044735100679757, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7517582427192594203, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150133830885729790, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150133830911710374, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150133831135737641, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150133831166650503, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11944c7ae5dd5834c89b0059ab4f57fb, type: 3}
 --- !u!1 &1705336250
@@ -1287,7 +1263,7 @@ MonoBehaviour:
   _optionMenu: {fileID: 1798058966}
   _resumeBtn: {fileID: 1813841477}
   _chooseLvlMenu: {fileID: 1765476172}
-  _level1Index: 1
+  _level1Index: 2
 --- !u!1 &1798058966 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4446951139536908523, guid: 077e5a00a11c85044aa624f89851e96f, type: 3}
