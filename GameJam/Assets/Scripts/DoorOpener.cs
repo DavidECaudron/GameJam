@@ -46,7 +46,7 @@ public class DoorOpener : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (_doorIsOpen || _uniqueUtilisation) return;
-        ModelController model = other.GetComponentInParent<ModelController>();
+        IControlableObject model = other.GetComponentInParent<IControlableObject>();
         if (model != null)
         {
             if (_needMinimumSizeForUse)
@@ -62,7 +62,7 @@ public class DoorOpener : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (_doorIsOpen || _uniqueUtilisation) return;
-        ModelController model = other.GetComponentInParent<ModelController>();
+        IControlableObject model = other.GetComponentInParent<IControlableObject>();
         if (model != null)
         {
             DisableOpener();
