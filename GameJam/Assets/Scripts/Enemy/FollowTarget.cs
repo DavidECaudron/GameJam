@@ -124,5 +124,15 @@ public class FollowTarget : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _chasingDistance);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, _killingDistance);
+    }
+
+    public bool OnChasing()
+    {
+        return _chasing;
     }
 }
+
+

@@ -14,10 +14,11 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        if (_doorOpener == null) return;
+        if (_doorOpener.Length == 0) return;
 
         foreach (DoorOpener opener in _doorOpener)
         {
+            if (opener == null) continue;
             opener.DoorOpenerEnableEvent += OpenerActivated;
         }        
     }
