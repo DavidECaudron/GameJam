@@ -2,7 +2,13 @@ fileFormatVersion: 2
 guid: 421762506dcbab54eb1def56db6838b8
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -1914687432315003435
+    second: modBckgrdPipes|ArmatureAction
+  - first:
+      74: 2483427289206665547
+    second: modBckgrdPipes|modDoorAction
   externalObjects: {}
   materials:
     materialImportMode: 2
