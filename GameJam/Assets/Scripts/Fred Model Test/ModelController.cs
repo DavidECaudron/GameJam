@@ -188,7 +188,8 @@ public class ModelController : MonoBehaviour, IControlableObject
         //PlayDeathSound();
         //Jouer animation mort
 
-        Instantiate(_deathFX, transform);
+        GameObject fx = Instantiate(_deathFX, Vector3.zero, Quaternion.identity, gameObject.transform);
+        fx.transform.localPosition = Vector3.zero;
         new WaitForSeconds(.5f);
         GameManager.Instance.RealoadCurrentScene();
     }
