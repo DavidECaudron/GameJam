@@ -2,16 +2,7 @@ fileFormatVersion: 2
 guid: b2324a5dcd366864394ba5aecdbf58c5
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: -2224840005028738368
-    second: modPlaqueSocle|animPlaque
-  - first:
-      74: -7526277249905351018
-    second: modPlaqueSocle|animPlaque.001
-  - first:
-      74: -5484381730193028
-    second: modPlaqueSocle|modDoorAction
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
