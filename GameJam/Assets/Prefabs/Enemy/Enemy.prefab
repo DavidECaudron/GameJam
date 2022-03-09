@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1991affecc45b643a89560fe0855a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSounds: []
+  _walkSounds:
+  - {fileID: 8300000, guid: d18296393370287489efdcc28f8ee3ca, type: 3}
   _screamSound: {fileID: 0}
   _minScreamSoundDuration: 0
   _maxScreamSoundDuration: 0

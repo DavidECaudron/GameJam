@@ -9,28 +9,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _maxScreamSoundDuration;
 
     private bool _canKillPlayer = true;
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        if (_canKillPlayer)
-    //        {
-    //            ModelController model = other.GetComponentInParent<ModelController>();
-    //            if (model == null)
-    //            {
-    //                //TODO Player part
-    //            }
-    //            else
-    //            {
-    //                //Player
-    //                if (!model.Alive) return;
-    //                model.Die();
-    //            }
-    //        }
-    //    }
-    //}
-
     private void Start()
     {
         StartCoroutine(PlayScreamSound());
@@ -43,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     public void PlayWalkSound()
     {
+        if (_walkSounds.Length == 0) return;
+
         int index = Random.Range(0, _walkSounds.Length);
         AudioManager.Instance.PlaySoundAt(_walkSounds[index], transform);
     }
