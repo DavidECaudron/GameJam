@@ -6,7 +6,6 @@ public enum DoorOpenerType
     Slab = 1
 }
 
-[RequireComponent(typeof(Animator))]
 public class DoorOpener : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
@@ -30,7 +29,7 @@ public class DoorOpener : MonoBehaviour
     {
         if (_doorIsOpen) return;
 
-        //_animator.SetTrigger("");
+        //_animator.SetTrigger("DownSlab");
 
         DoorOpenerEnableEvent?.Invoke();
     }
@@ -38,6 +37,9 @@ public class DoorOpener : MonoBehaviour
     private void DisableOpener()
     {
         if (_doorIsOpen) return;
+
+        //_animator.SetTrigger("UpSlab");
+
         DoorOpenerDisableEvent?.Invoke();
     }
 
