@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
+        if (_doorOpener == null) return;
+
         foreach (DoorOpener opener in _doorOpener)
         {
             opener.DoorOpenerEnableEvent += OpenerActivated;

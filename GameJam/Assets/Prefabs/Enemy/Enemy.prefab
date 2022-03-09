@@ -135,7 +135,7 @@ MonoBehaviour:
   _path: {fileID: 0}
   _distanceForNextTarget: 1
   _chasingDistance: 10
-  _killingDistance: 1
+  _killingDistance: 2
 --- !u!114 &1208829420
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class ModelController : MonoBehaviour, IControlableObject
     [SerializeField] private AudioClip[] _walkSounds;
     [SerializeField] private AudioClip _eatSound;
     [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private GameObject _deathFX;
 
     private float _movementX;
     private float _movementY;
@@ -186,6 +187,9 @@ public class ModelController : MonoBehaviour, IControlableObject
         Alive = false;
         //PlayDeathSound();
         //Jouer animation mort
+
+        Instantiate(_deathFX, transform);
+        new WaitForSeconds(.5f);
         GameManager.Instance.RealoadCurrentScene();
     }
 }

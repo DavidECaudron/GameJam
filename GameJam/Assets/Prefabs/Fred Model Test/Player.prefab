@@ -297,6 +297,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22cfebf314738d54e9f479f734c46a00, type: 3}
   _eatSound: {fileID: 0}
   _deathSound: {fileID: 0}
+  _deathFX: {fileID: 8465023962236595274, guid: 572b39342f904c24eb9e804b8c919524, type: 3}
   Alive: 1
   CanMove: 1
 --- !u!95 &6082321191927501901

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum DoorOpenerType
@@ -8,10 +9,10 @@ public enum DoorOpenerType
 
 public class DoorOpener : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
     [SerializeField] private DoorOpenerType OpenerType;
     [SerializeField] private bool _needMinimumSizeForUse;
     [SerializeField] private float _minSize;
+    [SerializeField] private SkinnedMeshRenderer _graphics;
 
     private bool _uniqueUtilisation;
     private bool _doorIsOpen;
@@ -29,7 +30,7 @@ public class DoorOpener : MonoBehaviour
     {
         if (_doorIsOpen) return;
 
-        //_animator.SetTrigger("DownSlab");
+        StartCoroutine(SlabAnim());
 
         DoorOpenerEnableEvent?.Invoke();
     }
@@ -38,7 +39,6 @@ public class DoorOpener : MonoBehaviour
     {
         if (_doorIsOpen) return;
 
-        //_animator.SetTrigger("UpSlab");
 
         DoorOpenerDisableEvent?.Invoke();
     }
@@ -69,5 +69,14 @@ public class DoorOpener : MonoBehaviour
     public void DoorIsOpen()
     {
         _doorIsOpen = true;
+    }
+
+    private IEnumerator SlabAnim()
+    {
+        while (_graphics.GetBlendShapeWeight(0) <= 100.0f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            _graphics.SetBlendShapeWeight(0, _graphics.GetBlendShapeWeight(0) + 1.0f);
+        }
     }
 }
