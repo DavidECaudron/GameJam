@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1991affecc45b643a89560fe0855a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSounds: []
+  _walkSounds:
+  - {fileID: 8300000, guid: d18296393370287489efdcc28f8ee3ca, type: 3}
   _screamSound: {fileID: 0}
   _minScreamSoundDuration: 0
   _maxScreamSoundDuration: 0
@@ -286,6 +287,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: modMonstre
       objectReference: {fileID: 0}
+    - target: {fileID: 2013526922628374429, guid: 286362ff354f6824a94a806686faa9c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: caed7d234dfa9c44eb4197e158cf2441, type: 2}
+    - target: {fileID: 2013526922628374429, guid: 286362ff354f6824a94a806686faa9c5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2847ec0d54836024d8f68d5064424d9d, type: 2}
+    - target: {fileID: 2013526922628374429, guid: 286362ff354f6824a94a806686faa9c5, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 455d9beda8a1a4fddb5c283861efccb0, type: 2}
+    - target: {fileID: 2013526922628374429, guid: 286362ff354f6824a94a806686faa9c5, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a9b66ffa4b2f2341a06b4e2dc1cf33e, type: 2}
+    - target: {fileID: 2013526922628374429, guid: 286362ff354f6824a94a806686faa9c5, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5fde6684fed56943a0d9c46d7b3a9a1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 286362ff354f6824a94a806686faa9c5, type: 3}
 --- !u!1 &922412580984700167 stripped
