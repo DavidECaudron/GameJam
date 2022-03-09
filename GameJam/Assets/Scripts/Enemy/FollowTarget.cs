@@ -9,6 +9,7 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private EnemyPath _path;
     [SerializeField] private float _distanceForNextTarget = .5f;
     [SerializeField] private float _chasingDistance = 10f;
+    [SerializeField] private float _killingDistance = 1f;
 
     private Vector3 _pathTargetPosition;
     private bool _chasing;
@@ -78,10 +79,24 @@ public class FollowTarget : MonoBehaviour
         if (CheckDistance(_target.transform.position, _chasingDistance))
         {
             _agent.SetDestination(_target.transform.position);
+            CheckTargetDistance();
         }
         else
         {
             StopChasing();
+        }
+    }
+
+    private void CheckTargetDistance()
+    {
+        if(Vector3.Distance(transform.position,_target.transform.position) <= _killingDistance)
+        {
+            ModelController model = _target.GetComponentInParent<ModelController>();
+            if(model != null)
+            {
+                model.Die();
+                StopChasing();
+            }
         }
     }
 
