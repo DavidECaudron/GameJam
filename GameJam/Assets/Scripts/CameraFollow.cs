@@ -7,6 +7,7 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private Camera _cam;
     [SerializeField] private Vector3 _offset;
+    [SerializeField] private bool _forceTargetForDebug;
 
     private void Awake()
     {
@@ -19,11 +20,6 @@ public class CameraFollow : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         Instance = this;
-    }
-
-    private void Start()
-    {
-        _target = FindObjectOfType<ModelController>().gameObject.transform;
     }
 
     private void LateUpdate()

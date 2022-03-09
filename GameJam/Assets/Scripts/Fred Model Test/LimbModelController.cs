@@ -17,7 +17,6 @@ public class LimbModelController : MonoBehaviour, IControlableObject
     private float _movementY;
 
     private bool _isFusionnable = false;
-
     private bool _canMoveAnimation;
 
     private void Start()
@@ -33,8 +32,8 @@ public class LimbModelController : MonoBehaviour, IControlableObject
 
         if (!_canMoveAnimation)
         {
-            _rigidBody.velocity = Vector3.zero;
-            _rigidBody.angularVelocity = Vector3.zero;
+            _rigidBody.velocity = new Vector3(0f, _rigidBody.velocity.y, 0f); ;
+            _rigidBody.angularVelocity = new Vector3(0f, _rigidBody.angularVelocity.y, 0f); ;
             return;
         }
 
