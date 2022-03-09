@@ -30,6 +30,14 @@ public class ModelController : MonoBehaviour, IControlableObject
     public bool Alive;
     public bool CanMove;
 
+    private void Update()
+    {
+        if (this.gameObject.transform.position.y >= 2.0f)
+        {
+            this.gameObject.transform.position.y = 2.0f;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!CanMove || !Alive) return;
