@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioClip[] _ambiances;
     [SerializeField] private AudioSource _ambianceSource;
+    [SerializeField] private AudioClip _cinematicClip;
 
     private bool _ambianceStarted;
     private int _musicIndex;
@@ -38,6 +39,18 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         _musicIndex = 0;
+        StartMusic();
+    }
+
+    public void PlayCinematicMusic()
+    {
+        StopCoroutine(nameof(PlayNextMusic));
+        _musicSource.clip = _cinematicClip;
+        _musicSource.Play();
+    }
+
+    public void StopCinematicMusic()
+    {
         StartMusic();
     }
 

@@ -6,6 +6,7 @@ public class NextScene : MonoBehaviour
 
     private void LoadNextScene()
     {
+        AudioManager.Instance.StopCinematicMusic();
         GameManager.Instance.LoadScene(_sceneIndex);
     }
 }
