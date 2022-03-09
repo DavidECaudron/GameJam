@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plaque
       objectReference: {fileID: 0}
+    - target: {fileID: 5552890526591247898, guid: f804628a520a54a419acc6686a4dd216, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6a911d0f3b2b6b429df14faca45aa87, type: 2}
     - target: {fileID: 6419929414470700124, guid: f804628a520a54a419acc6686a4dd216, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -148,6 +152,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6462202369294530115, guid: f804628a520a54a419acc6686a4dd216, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 80ed503897d051e4d9e1e4dbe97ed6f9, type: 2}
     m_RemovedComponents:
     - {fileID: 1051211892, guid: f804628a520a54a419acc6686a4dd216, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f804628a520a54a419acc6686a4dd216, type: 3}
