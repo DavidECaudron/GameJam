@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     public void ResumeGame()
     {
         //SaveData save = SaveManager.Instance.GetSaveData();
+        AudioManager.Instance.PlayCinematicMusic();
         GameManager.Instance.LoadScene(_level1Index);
     }
 
