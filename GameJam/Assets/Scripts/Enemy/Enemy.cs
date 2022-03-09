@@ -10,26 +10,26 @@ public class Enemy : MonoBehaviour
 
     private bool _canKillPlayer = true;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            if (_canKillPlayer)
-            {
-                ModelController model = other.GetComponentInParent<ModelController>();
-                if (model == null)
-                {
-                    //TODO Player part
-                }
-                else
-                {
-                    //Player
-                    if (!model.Alive) return;
-                    model.Die();
-                }
-            }
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //    {
+    //        if (_canKillPlayer)
+    //        {
+    //            ModelController model = other.GetComponentInParent<ModelController>();
+    //            if (model == null)
+    //            {
+    //                //TODO Player part
+    //            }
+    //            else
+    //            {
+    //                //Player
+    //                if (!model.Alive) return;
+    //                model.Die();
+    //            }
+    //        }
+    //    }
+    //}
 
     private void Start()
     {
