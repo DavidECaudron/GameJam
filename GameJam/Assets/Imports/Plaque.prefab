@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6419929414470700124}
+  - component: {fileID: 1051211892}
   m_Layer: 0
   m_Name: Plaque
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1051211892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618988499749963623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940d649dcc256794c874278b8d025064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graphics: {fileID: 6462202369294530115}
 --- !u!1001 &505007097354845704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,5 +228,10 @@ PrefabInstance:
 --- !u!4 &1452712595277023674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e938e6e7a77ca954cae44509a85c5bce, type: 3}
+  m_PrefabInstance: {fileID: 1415162818441014865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6462202369294530115 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3887185075125053422, guid: e938e6e7a77ca954cae44509a85c5bce, type: 3}
   m_PrefabInstance: {fileID: 1415162818441014865}
   m_PrefabAsset: {fileID: 0}
