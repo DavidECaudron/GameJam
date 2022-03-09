@@ -1263,7 +1263,7 @@ MonoBehaviour:
   _optionMenu: {fileID: 1798058966}
   _resumeBtn: {fileID: 1813841477}
   _chooseLvlMenu: {fileID: 1765476172}
-  _level1Index: 3
+  _level1Index: 4
 --- !u!1 &1798058966 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4446951139536908523, guid: 077e5a00a11c85044aa624f89851e96f, type: 3}

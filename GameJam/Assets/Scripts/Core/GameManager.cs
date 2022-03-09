@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour
 
     public bool OnMainMenu()
     {
-        return SceneManager.GetActiveScene().name == _mainMenuSceneName;
+        string sceneName = SceneManager.GetActiveScene().name;
+        return sceneName == "MainMenuScene" || sceneName == "Bubulles";
     }
 
     public GameObject GetPlayer()
