@@ -46,7 +46,8 @@ public class DoorOpener : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (_doorIsOpen || _uniqueUtilisation) return;
-        if (other.tag == "Player")
+        ModelController model = other.GetComponentInParent<ModelController>();
+        if (model != null)
         {
             if (_needMinimumSizeForUse)
             {
@@ -55,12 +56,14 @@ public class DoorOpener : MonoBehaviour
 
             EnableOpener();
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (_doorIsOpen || _uniqueUtilisation) return;
-        if (other.tag == "Player")
+        ModelController model = other.GetComponentInParent<ModelController>();
+        if (model != null)
         {
             DisableOpener();
         }
