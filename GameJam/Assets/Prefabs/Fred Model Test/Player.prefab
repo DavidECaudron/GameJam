@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144146838bfe86c4b9bb6da19464a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 250
+  _speed: 300
   _leftEye: {fileID: 6082321193924012018}
   _rightEye: {fileID: 6082321192663748164}
   _leftArm: {fileID: 6082321193452173932}
