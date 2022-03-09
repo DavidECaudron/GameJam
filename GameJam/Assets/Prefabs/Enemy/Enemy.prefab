@@ -132,7 +132,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _agent: {fileID: 1929971986258765335}
   _path: {fileID: 0}
-  _distanceForNextTarget: 0.5
+  _distanceForNextTarget: 1
   _chasingDistance: 10
 --- !u!114 &1208829420
 MonoBehaviour:
@@ -146,8 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1991affecc45b643a89560fe0855a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minTimeRepopPlayerPart: 0
-  _maxTimeRepopPlayerPart: 0
+  _walkSounds: []
+  _screamSound: {fileID: 0}
+  _minScreamSoundDuration: 0
+  _maxScreamSoundDuration: 0
 --- !u!54 &7765702812875320862
 Rigidbody:
   m_ObjectHideFlags: 0
