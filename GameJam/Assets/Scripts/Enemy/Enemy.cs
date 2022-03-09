@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
                 else
                 {
                     //Player
+                    if (!model.Alive) return;
                     model.Die();
                 }
             }
@@ -48,7 +49,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator PlayScreamSound()
     {
-        while (true)
+        while (true && _screamSound != null)
         {
             float duration = Random.Range(_minScreamSoundDuration, _maxScreamSoundDuration);
             yield return new WaitForSeconds(duration);

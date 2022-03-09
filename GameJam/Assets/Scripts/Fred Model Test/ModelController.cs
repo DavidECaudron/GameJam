@@ -32,13 +32,13 @@ public class ModelController : MonoBehaviour, IControlableObject
 
     private void FixedUpdate()
     {
-        if (!CanMove) return;
+        if (!CanMove || !Alive) return;
 
         bool condition = (_movementX != 0.0f || _movementY != 0.0f);
         _animator.SetBool("Move", condition);
 
         if (!_canMoveAnimation)
-        {            
+        {
             _rigidBody.velocity = new Vector3(0f, _rigidBody.velocity.y, 0f); ;
             _rigidBody.angularVelocity = new Vector3(0f, _rigidBody.angularVelocity.y, 0f); ;
             return;
@@ -167,7 +167,7 @@ public class ModelController : MonoBehaviour, IControlableObject
     public void EnableController()
     {
         _playerInput.enabled = true;
-       // _playerInput.ActivateInput();        
+        // _playerInput.ActivateInput();        
     }
 
     public void DisableController()
@@ -183,11 +183,9 @@ public class ModelController : MonoBehaviour, IControlableObject
 
     public void Die()
     {
-        Debug.Log("Die");
         Alive = false;
         //PlayDeathSound();
         //Jouer animation mort
-
         GameManager.Instance.RealoadCurrentScene();
     }
 }
