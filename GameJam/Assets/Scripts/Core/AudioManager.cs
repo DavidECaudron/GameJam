@@ -43,6 +43,7 @@ public class AudioManager : MonoBehaviour
 
     public void StartAmbianceSound()
     {
+        if (_ambiances.Length == 0) return;
         if (_ambianceStarted) return;
         _ambianceStarted = true;
 
@@ -68,6 +69,7 @@ public class AudioManager : MonoBehaviour
 
     private void StartMusic()
     {
+        if (_musics.Length == 0) return;
         AudioClip clip = _musics[_musicIndex];
         _musicSource.clip = clip;
         _musicSource.Play();
